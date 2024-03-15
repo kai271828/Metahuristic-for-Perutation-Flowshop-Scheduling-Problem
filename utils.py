@@ -42,10 +42,10 @@ class TFSProblem:
 
 class Solution:
     def __init__(self, length):
-        self.sol = np.random.permutation(length) + 1
+        self.sol = np.random.permutation(length)
 
     def __repr__(self):
-        return ", ".join(map(str, self.sol.tolist()))
+        return ", ".join(map(lambda x: str(x + 1), self.sol.tolist()))
 
     def swap_neighborhood(self, i, j):
         """
