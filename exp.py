@@ -2,6 +2,7 @@ import fire
 import numpy as np
 from typing import Union
 from tqdm.auto import tqdm
+from datetime import datetime
 
 from utils import TFSProblem, Solution
 from SimulatedAnnealing import SimulatedAnnealing
@@ -14,7 +15,7 @@ def main(
     stopcriterion: Union[float, int] = 1,
     temperature: Union[float, int] = 1000,
     times: int = 20,
-    output_dir: str = "output",
+    log_dir: Union[str, None] = "log",
     verbose: bool = False,
 ):
     p = TFSProblem(data_dir)
@@ -26,6 +27,12 @@ def main(
     worst_sol = None
     record = []
 
+    log_file = (
+        open(f"{log_dir}/{datetime.now().strftime('%Y-%m-%d %H:%M')}.txt", "w+")
+        if log_dir is not None
+        else None
+    )
+
     for i in tqdm(range(times)):
         solution, search_steps = sa.search(p, temperature, verbose=verbose)
         makespan = p.evaluate(solution.sol)
@@ -33,7 +40,12 @@ def main(
 
         if verbose:
             print(f"\n\nFinal solution: {solution} after {search_steps} steps.")
-            print(f"The minimum makespan is {makespan}.")
+            print(f"The makespan is {makespan}.")
+        if log_file is not None:
+            log_file.write(
+                f"[Experiment {i + 1}] get solution \t{solution}\t after {search_steps} steps."
+            )
+            log_file.write(f"The makespan is {makespan}.\n")
 
         if makespan < best:
             best = makespan
@@ -44,7 +56,13 @@ def main(
 
     print(f"\n\nBest solutin {best_sol} has makespan {best}")
     print(f"Worst solutin {worst_sol} has makespan {worst}")
-    print(f"Average makespan {sum(record) / len(record)}")
+    print(f"Average makespan {sum(record) / times}")
+
+    if log_file is not None:
+        log_file.write(f"\n\nBest solutin {best_sol} has makespan {best}")
+        log_file.write(f"Worst solutin {worst_sol} has makespan {worst}")
+        log_file.write(f"Average makespan {sum(record) / times}")
+        log_file.close()
 
 
 if __name__ == "__main__":
