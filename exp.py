@@ -1,6 +1,7 @@
 import fire
 import numpy as np
 from typing import Union
+from tqdm.quto import tqdm
 
 from utils import TFSProblem, Solution
 from SimulatedAnnealing import SimulatedAnnealing
@@ -25,7 +26,7 @@ def main(
     worst_sol = None
     record = []
 
-    for i in range(times):
+    for i in tqdm(range(times)):
         solution, search_steps = sa.search(p, temperature, verbose=verbose)
         makespan = p.evaluate(solution.sol)
         record.append(makespan)
