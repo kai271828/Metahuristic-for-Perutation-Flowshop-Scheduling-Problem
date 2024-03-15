@@ -15,7 +15,7 @@ def main(
     stopcriterion: Union[float, int] = 1,
     temperature: Union[float, int] = 1000,
     times: int = 20,
-    log_dir: Union[str, None] = "log",
+    log_dir: Union[str, None] = None,
     verbose: bool = False,
 ):
     p = TFSProblem(data_dir)
@@ -43,7 +43,7 @@ def main(
             print(f"The makespan is {makespan}.")
         if log_file is not None:
             log_file.write(
-                f"[Experiment {i + 1}] get solution \t{solution}\t after {search_steps} steps."
+                f"[Experiment {i + 1}] get solution \t{solution}\t after {search_steps} steps.\n"
             )
             log_file.write(f"The makespan is {makespan}.\n")
 
@@ -59,9 +59,9 @@ def main(
     print(f"Average makespan {sum(record) / times}")
 
     if log_file is not None:
-        log_file.write(f"\n\nBest solutin {best_sol} has makespan {best}")
-        log_file.write(f"Worst solutin {worst_sol} has makespan {worst}")
-        log_file.write(f"Average makespan {sum(record) / times}")
+        log_file.write(f"\n\nBest solutin {best_sol} has makespan {best}\n")
+        log_file.write(f"Worst solutin {worst_sol} has makespan {worst}\n")
+        log_file.write(f"Average makespan {sum(record) / times}\n")
         log_file.close()
 
 
