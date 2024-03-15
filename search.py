@@ -32,7 +32,7 @@ def search(
             alpha=param["al"],
             stopcriterion=param["sc"],
             temperature=param["t"],
-            time=times,
+            times=times,
             log_dir=None,
             verbose=False,
         )
