@@ -19,8 +19,8 @@ def main(
 
     solution, search_steps = sa.search(p, temperature, verbose=verbose)
 
-    print(f"Final solution: {solution} after {search_steps} steps.")
-    print(f"The minimum makespain is {p.evaluate(solution)}.")
+    print(f"\n\nFinal solution: {solution} after {search_steps} steps.")
+    print(f"The minimum makespain is {p.evaluate(solution.sol)}.")
 
 
 if __name__ == "__main__":
