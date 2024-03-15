@@ -2,6 +2,7 @@ import fire
 from typing import Union
 
 from utils import TFSProblem, Solution
+from SimulatedAnnealing import SimulatedAnnealing
 
 
 def main(
