@@ -54,15 +54,19 @@ def main(
             worst = makespan
             worst_sol = solution
 
+    avg = sum(record) / times
+
     print(f"\n\nBest solutin {best_sol} has makespan {best}")
     print(f"Worst solutin {worst_sol} has makespan {worst}")
-    print(f"Average makespan {sum(record) / times}")
+    print(f"Average makespan {avg}")
 
     if log_file is not None:
         log_file.write(f"\n\nBest solutin {best_sol} has makespan {best}\n")
         log_file.write(f"Worst solutin {worst_sol} has makespan {worst}\n")
-        log_file.write(f"Average makespan {sum(record) / times}\n")
+        log_file.write(f"Average makespan {avg}\n")
         log_file.close()
+
+    return best, avg, worst
 
 
 if __name__ == "__main__":
