@@ -25,7 +25,12 @@ class SimulatedAnnealing:
                 print(f"[Step {k + 1}] Current Temperature: {temperature}")
 
             for l in range(self.epoch_len):
-                j = i.swap_neighborhood()
+                a = np.random.randint(0, high=i.sol.shape[-1])
+                b = np.random.randint(0, high=i.sol.shape[-1])
+                if a == b:
+                    b = (a + 1) % i.sol.shape[-1]
+
+                j = i.swap_neighborhood(a, b)
                 if problem.evaluate(i.sol) <= problem.evaluate(j):
                     i.set_sol(j)
                     if verbose:
