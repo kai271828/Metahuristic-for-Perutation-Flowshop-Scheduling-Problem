@@ -25,7 +25,7 @@ def main(
     worst_sol = None
     record = []
 
-    for i in range(tims):
+    for i in range(times):
         solution, search_steps = sa.search(p, temperature, verbose=verbose)
         makespan = p.evaluate(solution.sol)
         record.append(makespan)
