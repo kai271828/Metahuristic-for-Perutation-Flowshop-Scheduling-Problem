@@ -36,7 +36,9 @@ class SimulatedAnnealing:
                     if verbose:
                         print(f"Set solution to {i} since it is better.")
                 elif (
-                    np.exp((problem.evaluate(i.sol) - problem.evaluate(j)) / self.c)
+                    np.exp(
+                        (problem.evaluate(i.sol) - problem.evaluate(j)) / temperature
+                    )
                     > np.random.rand()
                 ):
                     i.set_sol(j)
