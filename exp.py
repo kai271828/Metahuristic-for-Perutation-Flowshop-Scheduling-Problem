@@ -17,6 +17,8 @@ def main(
 
     solution, search_steps = sa.search(p, temperature)
 
+    print(solution, search_steps)
+
 
 if __name__ == "__main__":
     fire.Fire(main)
