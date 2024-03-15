@@ -11,12 +11,13 @@ def main(
     alpha: float = 0.99,
     stopcriterion: Union[float, int] = 1,
     temperature: Union[float, int] = 1000,
+    verbose: bool = False,
 ):
     p = TFSProblem(data_dir)
 
     sa = SimulatedAnnealing(epoch_len, alpha, stopcriterion)
 
-    solution, search_steps = sa.search(p, temperature)
+    solution, search_steps = sa.search(p, temperature, verbose=verbose)
 
     print(solution, search_steps)
 
