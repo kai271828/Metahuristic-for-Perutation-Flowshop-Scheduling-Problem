@@ -1,7 +1,7 @@
 import fire
 import numpy as np
 from typing import Union
-from tqdm.quto import tqdm
+from tqdm.auto import tqdm
 
 from utils import TFSProblem, Solution
 from SimulatedAnnealing import SimulatedAnnealing
