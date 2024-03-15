@@ -31,13 +31,13 @@ def main(
         record.append(makespan)
 
         print(f"\n\nFinal solution: {solution} after {search_steps} steps.")
-        print(f"The minimum makespain is {makespain}.")
+        print(f"The minimum makespan is {makespan}.")
 
         if makespan < best:
-            best = makespain
+            best = makespan
             best_sol = solution
         elif makespan > worst:
-            worst = makespain
+            worst = makespan
             worst_sol = solution
 
     print(f"\n\nBest solutin {best_sol} has makespan {best}")
