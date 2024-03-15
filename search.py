@@ -35,6 +35,7 @@ def search(
             times=times,
             log_dir=None,
             verbose=False,
+            run_search=True,
         )
 
         if metric == "avg" and avg < best_performance:

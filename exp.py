@@ -17,6 +17,7 @@ def main(
     times: int = 20,
     log_dir: Union[str, None] = None,
     verbose: bool = False,
+    run_search: bool = False,
 ):
     p = TFSProblem(data_dir)
     sa = SimulatedAnnealing(epoch_len, alpha, stopcriterion)
@@ -56,9 +57,10 @@ def main(
 
     avg = sum(record) / times
 
-    print(f"\n\nBest solutin {best_sol} has makespan {best}")
-    print(f"Worst solutin {worst_sol} has makespan {worst}")
-    print(f"Average makespan {avg}")
+    if not run_search:
+        print(f"\n\nBest solutin {best_sol} has makespan {best}")
+        print(f"Worst solutin {worst_sol} has makespan {worst}")
+        print(f"Average makespan {avg}")
 
     if log_file is not None:
         log_file.write(f"\n\nBest solutin {best_sol} has makespan {best}\n")
