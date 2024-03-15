@@ -29,11 +29,13 @@ class TFSProblem:
             for machine_id in range(self.num_machines):
                 if machine_id != 0:
                     cache[machine_id] = (
-                        max(cache[machine - 1], cache[machine])
-                        + self.mj_table[machine, job]
+                        max(cache[machine_id - 1], cache[machine_id])
+                        + self.mj_table[machine_id, job_id]
                     )
                 else:
-                    cache[machine] = cache[machine] + self.mj_table[machine, job]
+                    cache[machine_id] = (
+                        cache[machine_id] + self.mj_table[machine_id, job_id]
+                    )
 
             return cache[-1]
 
