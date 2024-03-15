@@ -40,13 +40,13 @@ def search(
 
         if metric == "avg" and avg < best_performance:
             best_performance = avg
-            best_parm = param
+            best_param = param
         elif metric == "best" and best < best_performance:
             best_performance = best
-            best_parm = param
+            best_param = param
         elif metric == "worst" and worst < best_performance:
             best_performance = worst
-            best_parm = param
+            best_param = param
 
     print(
         f"""The best setting is 
