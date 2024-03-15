@@ -31,8 +31,9 @@ def main(
         makespan = p.evaluate(solution.sol)
         record.append(makespan)
 
-        print(f"\n\nFinal solution: {solution} after {search_steps} steps.")
-        print(f"The minimum makespan is {makespan}.")
+        if verbose:
+            print(f"\n\nFinal solution: {solution} after {search_steps} steps.")
+            print(f"The minimum makespan is {makespan}.")
 
         if makespan < best:
             best = makespan
