@@ -5,7 +5,7 @@ from utils import TFSProblem, Solution
 
 
 def main(
-    data_dir: str = "data\\tai20_5_1.txt",
+    data_dir: str = "data/tai20_5_1.txt",
     epoch_len: int = 1,
     alpha: float = 0.99,
     stopcriterion: Union[float, int] = 1,
