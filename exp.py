@@ -34,7 +34,8 @@ def main(
         else None
     )
 
-    for i in tqdm(range(times)):
+    p_bar = range(times) if run_search else tqdm(range(times))
+    for i in p_bar:
         solution, search_steps = sa.search(p, temperature, verbose=verbose)
         makespan = p.evaluate(solution.sol)
         record.append(makespan)
