@@ -27,7 +27,7 @@ class TFSProblem:
         cache = np.zeros(self.num_machines)
         for job_id in sol:
             for machine_id in range(self.num_machines):
-                if machine != 0:
+                if machine_id != 0:
                     cache[machine_id] = (
                         max(cache[machine - 1], cache[machine])
                         + self.mj_table[machine, job]
