@@ -43,7 +43,7 @@ class SimulatedAnnealing:
                 ):
                     i.set_sol(j)
                     if verbose:
-                        print(f"Set solution to {i} but it isn't better.")
+                        print(f"Set solution to {i} but it is NOT better.")
 
             k += 1
             temperature = self.calculate_control(temperature)
