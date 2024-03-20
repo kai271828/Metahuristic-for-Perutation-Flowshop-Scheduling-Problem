@@ -48,23 +48,29 @@
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
-      <ul>
+      <!-- <ul>
         <li><a href="#built-with">Built With</a></li>
-      </ul>
+      </ul> -->
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <!-- <li><a href="#prerequisites">Prerequisites</a></li> -->
+        <!-- <li><a href="#installation">Installation</a></li> -->
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
+    <li>
+      <a href="#usage">Usage</a>
+      <ul>
+        <li><a href="#search-minimum-makespan-with-specific-parameters">Search minimum makespan with specific parameters</a></li>
+        <li><a href="#search-the-best-parameters-using-random-search">Search the best parameters using random search</a></li>
+      </ul>
+    </li>
+    <!-- <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li> -->
   </ol>
 </details>
 
@@ -130,7 +136,7 @@ Install packages through pip.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-### Search minimum makespan with specific parameters.
+### Search minimum makespan with specific parameters
 Here is an example:
 ```sh
 python exp.py \
@@ -154,11 +160,11 @@ python exp.py \
 | log_dir  | Total run times of this experiment.  |
 | verbose  | Weather to show the experiment detail. Default to False. |
 
-### Search the best parameters using random search.
+### Search the best parameters using random search
 Run the following command to try to find the optimal configuration of Simulated Annealing within the given range.
 ```sh
 python python search.py \
-    --data_dir: str "data/tai20_5_1.txt" \
+    --data_dir "data/tai20_5_1.txt" \
     --epoch_len [1, 11] \
     --alpha [0.8, 0.99] \
     --stopcriterion [1, 2] \
