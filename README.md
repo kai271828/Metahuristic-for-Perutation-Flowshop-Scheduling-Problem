@@ -176,7 +176,7 @@ python python search.py \
 Most parameters are the same as above except you should give a range [low, high) rather than a mere value.
 |  Parameter   | Description  |
 |  ----  | ----  |
-| search_times  | How many configurations to be found in this search. |
+| search_times  | The number of configurations searched. |
 | metric  | How to evaluate the result. {"best", "avg", "worst"}, default to "avg"  |
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
