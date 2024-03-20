@@ -156,7 +156,7 @@ python exp.py \
 | alpha  | Cooling factor.  |
 | stopcriterion  | Lowest temperature before stopping.  |
 | temperature  | Initial searching temperature.  |
-| times  | Total run times .  |
+| times  | Total run times of this experiment. Related to output statistic. |
 | log_dir  | Total run times of this experiment.  |
 | verbose  | Weather to show the experiment detail. Default to False. |
 
@@ -176,8 +176,8 @@ python python search.py \
 Most parameters are the same as above except you should give a range [low, high) rather than a mere value.
 |  Parameter   | Description  |
 |  ----  | ----  |
-| search_times  | Path to the input file. |
-| metric  | Searching times before temperature decrease.  |
+| search_times  | How many configurations to be found in this search. |
+| metric  | How to evaluate the result. {"best", "avg", "worst"}, default to "avg"  |
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
