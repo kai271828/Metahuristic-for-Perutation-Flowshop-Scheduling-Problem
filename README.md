@@ -163,7 +163,7 @@ python exp.py \
 ### Search the best parameters using random search
 Run the following command to try to find the optimal configuration of Simulated Annealing within the given range.
 ```sh
-python python search.py \
+python search.py \
     --data_dir "data/tai20_5_1.txt" \
     --epoch_len [1, 11] \
     --alpha [0.8, 0.99] \
