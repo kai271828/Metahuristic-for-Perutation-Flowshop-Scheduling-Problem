@@ -21,7 +21,6 @@ class TFSProblem:
     def sol_length(self):
         return self.num_jobs
 
-    @njit
     def evaluate(self, sol):
         """
         Calculate the makespan for a given solution.
