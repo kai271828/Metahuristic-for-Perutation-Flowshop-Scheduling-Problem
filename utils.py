@@ -26,8 +26,6 @@ class TFSProblem:
         """
         machine_cache = np.zeros(self.num_machines)
 
-        print(sol)
-
         for job_id in sol:
             for machine_id in range(self.num_machines):
                 if machine_id != 0:
@@ -39,14 +37,13 @@ class TFSProblem:
                     machine_cache[machine_id] = (
                         machine_cache[machine_id] + self.mj_table[machine_id, job_id]
                     )
-            print(f"job_id={job_id}, machine_cache={machine_cache}")
 
         return machine_cache[-1]
 
 
 class Solution:
     def __init__(self, length):
-        self.sol = np.random.permutation(length).reshape(length)
+        self.sol = np.random.permutation(length)
 
     def __repr__(self):
         return ", ".join(map(lambda x: str(x + 1), self.sol.tolist()))
