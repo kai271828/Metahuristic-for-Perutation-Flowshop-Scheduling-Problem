@@ -26,8 +26,7 @@ class TFSProblem:
         """
         machine_cache = np.zeros(self.num_machines)
 
-        for x in sol:
-            print(f"Debug: {x}")
+        print(sol)
 
         for job_id in sol:
             for machine_id in range(self.num_machines):
