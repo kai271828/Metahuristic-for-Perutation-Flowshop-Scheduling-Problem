@@ -38,16 +38,17 @@ def main(
 
     p_bar = range(times) if run_search else tqdm(range(times))
     for i in p_bar:
-        solution, search_steps = sa.search(p, temperature, verbose=verbose)
+        solution, search_step, ffe = sa.search(p, temperature, verbose=verbose)
         makespan = p.evaluate(solution.sol)
         record.append(makespan)
 
         if verbose:
             print(f"\n\nFinal solution: {solution} after {search_steps} steps.")
+            print(f"ffe = {ffe}")
             print(f"The makespan is {makespan}.")
         if log_file is not None:
             log_file.write(
-                f"[Experiment {i + 1}] get solution \t{solution}\t after {search_steps} steps.\n"
+                f"[Experiment {i + 1}] get solution \t{solution}\t after {search_steps} steps and {ffe} ffe.\n"
             )
             log_file.write(f"The makespan is {makespan}.\n")
 

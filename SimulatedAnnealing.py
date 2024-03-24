@@ -19,6 +19,7 @@ class SimulatedAnnealing:
         i = Solution(problem.sol_length)
         l = self.epoch_len
         k = 0
+        ffe = 0
 
         while temperature > self.stopcriterion:
             if verbose:
@@ -31,6 +32,7 @@ class SimulatedAnnealing:
                     b = (a + 1) % i.sol.shape[-1]
 
                 j = i.swap_neighborhood(a, b)
+                ffe += 1
                 if problem.evaluate(i.sol) <= problem.evaluate(j):
                     i.set_sol(j)
                     if verbose:
@@ -49,7 +51,7 @@ class SimulatedAnnealing:
             temperature = self.calculate_control(temperature)
             l = self.calculate_control(l)
 
-        return i, k
+        return i, k, ffe
 
     def calculate_control(self, temperature):
         return temperature * self.alpha
