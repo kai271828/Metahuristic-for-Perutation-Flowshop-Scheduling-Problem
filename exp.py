@@ -43,7 +43,7 @@ def main(
         record.append(makespan)
 
         if verbose:
-            print(f"\n\nFinal solution: {solution} after {search_steps} steps.")
+            print(f"\n\nFinal solution: {solution} after {search_step} steps.")
             print(f"ffe = {ffe}")
             print(f"The makespan is {makespan}.")
         if log_file is not None:
