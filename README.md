@@ -165,14 +165,14 @@ Run the following command to try to find the optimal configuration of Simulated 
 ```sh
 python search.py \
     --data_dir "data/tai20_5_1.txt" \
-    min_epoch_len 1 \
-    max_epoch_len 11 \
-    min_alpha 0.8 \
-    max_alpha 0.99 \
-    min_stopcriterion 1 \
-    max_stopcriterion 2 \
-    min_temperature 100 \
-    max_temperature 10000 \
+    --min_epoch_len 1 \
+    --max_epoch_len 11 \
+    --min_alpha 0.8 \
+    --max_alpha 0.99 \
+    --min_stopcriterion 1 \
+    --max_stopcriterion 2 \
+    --min_temperature 100 \
+    --max_temperature 10000 \
     --times 20 \
     --search_times 10000 \
     --metric "avg"
