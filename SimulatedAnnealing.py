@@ -1,8 +1,10 @@
 import numpy as np
+from numba import jitclass
 
 from utils import Solution
 
 
+@jitclass
 class SimulatedAnnealing:
     def __init__(
         self,
