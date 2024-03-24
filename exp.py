@@ -1,5 +1,6 @@
 import fire
 import numpy as np
+from numba import njit
 from typing import Union
 from tqdm.auto import tqdm
 from datetime import datetime
@@ -8,6 +9,7 @@ from utils import TFSProblem, Solution
 from SimulatedAnnealing import SimulatedAnnealing
 
 
+@njit
 def main(
     data_dir: str = "data/tai20_5_1.txt",
     epoch_len: int = 1,
