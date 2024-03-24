@@ -36,7 +36,7 @@ class TFSProblem:
                     machine_cache[machine_id] = (
                         machine_cache[machine_id] + self.mj_table[machine_id, job_id]
                     )
-            print("sol", sol)
+            print("sol:", sol.shape)
             print(f"job_id={job_id}, machine_cache={machine_cache}")
             return machine_cache[-1]
 
