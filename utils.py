@@ -37,6 +37,7 @@ class TFSProblem:
                         cache[machine_id] + self.mj_table[machine_id, job_id]
                     )
 
+            print(cache)
             return cache[-1]
 
 
