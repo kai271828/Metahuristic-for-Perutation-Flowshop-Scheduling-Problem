@@ -44,7 +44,7 @@ class SimulatedAnnealing:
                     record["per_ffe"].append(new_makespan)
                     record["per_k"].append(new_makespan)
                     if verbose:
-                        print(f"Set solution to {i} since it is better.")
+                        print(f"Set solution to {j} since {new_makespan} is better.")
 
                 elif (
                     np.exp((old_makespan - new_makespan) / temperature)
@@ -54,12 +54,17 @@ class SimulatedAnnealing:
                     record["per_ffe"].append(new_makespan)
                     record["per_k"].append(new_makespan)
                     if verbose:
+                        print(f"Set solution to {j} but it is NOT better.")
                         print(
                             f"Exp value: {np.exp((old_makespan - new_makespan) / temperature)}"
                         )
-                        print(f"Set solution to {i} but it is NOT better.")
                 else:
                     record["per_ffe"].append(old_makespan)
+                    if verbose:
+                        print("Didn't set anything.")
+                        print(
+                            f"Exp value: {np.exp((old_makespan - new_makespan) / temperature)}"
+                        )
 
             k += 1
             temperature = self.calculate_control(temperature)
