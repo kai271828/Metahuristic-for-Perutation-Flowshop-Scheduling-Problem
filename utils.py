@@ -24,21 +24,21 @@ class TFSProblem:
         """
         Calculate the makespan for a given solution.
         """
-        cache = np.zeros(self.num_machines)
+        machine_cache = np.zeros(self.num_machines)
         for job_id in sol:
             for machine_id in range(self.num_machines):
                 if machine_id != 0:
-                    cache[machine_id] = (
-                        max(cache[machine_id - 1], cache[machine_id])
+                    machine_cache[machine_id] = (
+                        max(machine_cache[machine_id - 1], machine_cache[machine_id])
                         + self.mj_table[machine_id, job_id]
                     )
                 else:
-                    cache[machine_id] = (
-                        cache[machine_id] + self.mj_table[machine_id, job_id]
+                    machine_cache[machine_id] = (
+                        machine_cache[machine_id] + self.mj_table[machine_id, job_id]
                     )
 
-            print(cache)
-            return cache[-1]
+            print(f"job_id={job_id}, machine_cache={machine_cache}")
+            return machine_cache[-1]
 
 
 class Solution:
