@@ -25,6 +25,7 @@ class TFSProblem:
         Calculate the makespan for a given solution.
         """
         machine_cache = np.zeros(self.num_machines)
+        print(sol.shape)
         for job_id in sol:
             for machine_id in range(self.num_machines):
                 if machine_id != 0:
@@ -36,7 +37,6 @@ class TFSProblem:
                     machine_cache[machine_id] = (
                         machine_cache[machine_id] + self.mj_table[machine_id, job_id]
                     )
-            print(sol.shape)
             print(f"job_id={job_id}, machine_cache={machine_cache}")
             return machine_cache[-1]
 
