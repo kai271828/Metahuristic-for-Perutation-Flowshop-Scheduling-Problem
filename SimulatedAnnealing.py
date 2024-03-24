@@ -25,9 +25,12 @@ class SimulatedAnnealing:
         while temperature > self.stopcriterion:
             record["temperature"].append(temperature)
             if verbose:
-                print(f"[Step {k + 1}] Current Temperature: {temperature}")
+                print(f"[Epoch {k + 1}] Current Temperature: {temperature}")
 
             for l in range(self.epoch_len):
+                if verbose:
+                    print(f"[Step {l + 1}]")
+
                 a = np.random.randint(0, high=i.sol.shape[-1])
                 b = np.random.randint(0, high=i.sol.shape[-1])
                 if a == b:
@@ -44,7 +47,9 @@ class SimulatedAnnealing:
                     record["per_ffe"].append(new_makespan)
                     record["per_k"].append(new_makespan)
                     if verbose:
-                        print(f"Set solution to {j} since {new_makespan} is better.")
+                        print(
+                            f"Set solution to {j} since {new_makespan} is better than {old_makespan}."
+                        )
 
                 elif (
                     np.exp((old_makespan - new_makespan) / temperature)
