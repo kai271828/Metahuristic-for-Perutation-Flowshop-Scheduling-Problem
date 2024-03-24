@@ -40,7 +40,8 @@ class TFSProblem:
                         machine_cache[machine_id] + self.mj_table[machine_id, job_id]
                     )
             print(f"job_id={job_id}, machine_cache={machine_cache}")
-            return machine_cache[-1]
+
+        return machine_cache[-1]
 
 
 class Solution:
