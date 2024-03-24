@@ -1,8 +1,6 @@
 import numpy as np
-from numba.experimental import jitclass
 
 
-@jitclass
 class TFSProblem:
     def __init__(self, input_dir):
         with open(input_dir) as input_file:
