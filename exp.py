@@ -54,7 +54,7 @@ def main(
         if makespan < best:
             best = makespan
             best_sol = solution
-        elif makespan > worst:
+        if makespan > worst:
             worst = makespan
             worst_sol = solution
 
