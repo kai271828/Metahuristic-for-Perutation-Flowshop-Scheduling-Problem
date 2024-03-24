@@ -8,10 +8,14 @@ from exp import main
 
 def search(
     data_dir: str = "data/tai20_5_1.txt",
-    epoch_len=[1, 11],
-    alpha=[0.8, 0.99],
-    stopcriterion=[1, 2],
-    temperature=[100, 10000],
+    min_epoch_len=1,
+    max_epoch_len=11,
+    min_alpha=0.8,
+    max_alpha=0.99,
+    min_stopcriterion=1,
+    max_stopcriterion=2,
+    min_temperature=100,
+    max_temperature=10000,
     times=20,
     search_times=10000,
     metric="avg",
@@ -20,10 +24,10 @@ def search(
 
     for i in tqdm(range(search_times)):
         param = {
-            "el": np.random.randint(epoch_len[0], epoch_len[1]),
-            "al": alpha[0] + np.random.rand() * (alpha[1] - alpha[0]),
-            "sc": np.random.randint(stopcriterion[0], stopcriterion[1]),
-            "t": np.random.randint(temperature[0], temperature[1]),
+            "el": np.random.randint(min_epoch_len, max_epoch_len),
+            "al": min_alpha + np.random.rand() * (max_alpha - min_alpha),
+            "sc": np.random.randint(min_stopcriterion, max_stopcriterion),
+            "t": np.random.randint(min_temperature, max_temperature),
         }
 
         best, avg, worst = main(

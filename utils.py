@@ -1,4 +1,5 @@
 import numpy as np
+from numba import njit
 
 
 class TFSProblem:
@@ -20,6 +21,7 @@ class TFSProblem:
     def sol_length(self):
         return self.num_jobs
 
+    @njit
     def evaluate(self, sol):
         """
         Calculate the makespan for a given solution.
@@ -47,6 +49,7 @@ class Solution:
     def __repr__(self):
         return ", ".join(map(lambda x: str(x + 1), self.sol.tolist()))
 
+    @njit
     def swap_neighborhood(self, i, j):
         """
         Return a new solution numpy array obtained by swap two elements
