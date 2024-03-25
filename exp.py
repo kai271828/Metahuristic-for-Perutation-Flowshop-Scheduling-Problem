@@ -62,6 +62,7 @@ def main(
             worst_sol = solution
 
     avg = sum(record) / times
+    avg_ffe = sum(ffes) / len(ffes)
 
     if not run_search:
         print(f"\n\nBest solutin {best_sol} has makespan {best}")
@@ -72,7 +73,7 @@ def main(
     if log_file is not None:
         log_file.write(f"\n\nBest solutin {best_sol} has makespan {best}\n")
         log_file.write(f"Worst solutin {worst_sol} has makespan {worst}\n")
-        log_file.write(f"Average makespan {avg}\n")
+        log_file.write(f"Average makespan {avg_ffe}\n")
         log_file.close()
 
     return best, avg, worst
