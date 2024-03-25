@@ -29,6 +29,7 @@ def main(
     worst = 0
     worst_sol = None
     record = []
+    ffes = []
 
     log_file = (
         open(f"{log_dir}/{datetime.now().strftime('%Y-%m-%d %H:%M')}.txt", "w+")
@@ -41,6 +42,7 @@ def main(
         solution, search_step, ffe, _ = sa.search(p, temperature, verbose=verbose)
         makespan = p.evaluate(solution.sol)
         record.append(makespan)
+        ffes.append(ffe)
 
         if verbose:
             print(f"\n\nFinal solution: {solution} after {search_step} steps.")
@@ -65,6 +67,7 @@ def main(
         print(f"\n\nBest solutin {best_sol} has makespan {best}")
         print(f"Worst solutin {worst_sol} has makespan {worst}")
         print(f"Average makespan {avg}")
+        print(f"Average ffe {ffes}")
 
     if log_file is not None:
         log_file.write(f"\n\nBest solutin {best_sol} has makespan {best}\n")
