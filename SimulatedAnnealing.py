@@ -17,7 +17,7 @@ class SimulatedAnnealing:
     def search(self, problem, temperature, verbose=False):
 
         i = Solution(problem.sol_length)
-        l = self.epoch_len
+        length = self.epoch_len
         k = 0
         ffe = 0
         record = {"per_update": [], "per_ffe": [], "temperature": []}
@@ -27,7 +27,7 @@ class SimulatedAnnealing:
             if verbose:
                 print(f"[Epoch {k + 1}] Current Temperature: {temperature}")
 
-            for l in range(self.epoch_len):
+            for l in range(length):
                 if verbose:
                     print(f"[Step {l + 1}]")
 
@@ -69,7 +69,7 @@ class SimulatedAnnealing:
 
             k += 1
             temperature = self.calculate_control(temperature)
-            l = self.calculate_length(l)
+            length = self.calculate_length(length)
 
         return i, k, ffe, record
 
