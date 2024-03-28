@@ -14,9 +14,9 @@ class SimulatedAnnealing:
         self.alpha = alpha
         self.stopcriterion = stopcriterion
 
-    def search(self, problem, temperature, verbose=False):
+    def search(self, problem, temperature, init_sol=None, verbose=False):
 
-        i = Solution(problem.sol_length)
+        i = Solution(problem.sol_length) if init_sol is None else init_sol
         length = self.epoch_len
         k = 0
         ffe = 0
