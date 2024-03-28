@@ -7,7 +7,6 @@ from utils import TFSProblem, Solution
 from MA import MA
 
 
-@jit
 def main(
     data_dir="data/tai20_5_1.txt",
     cross_prob=0.5,
