@@ -9,7 +9,7 @@ from MA import MA
 
 @jit
 def main(
-    data_di="data/tai20_5_1.txt",
+    data_dir="data/tai20_5_1.txt",
     cross_prob=0.5,
     muta_prob=0.2,
     epoch_len=10,
