@@ -68,8 +68,8 @@ class SimulatedAnnealing:
                             )
 
             k += 1
-            temperature = self.calculate_temperature(temperature)
-            l = self.calculate_control(l)
+            temperature = self.calculate_control(temperature)
+            l = self.calculate_length(l)
 
         return i, k, ffe, record
 
