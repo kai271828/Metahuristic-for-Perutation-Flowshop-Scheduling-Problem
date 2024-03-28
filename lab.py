@@ -2,13 +2,12 @@ import fire
 import numpy as np
 from numba import jit
 from typing import Union
-from tqdm.auto import tqdm
-from datetime import datetime
 
 from utils import TFSProblem, Solution
 from MA import MA
 
 
+@jit
 def main(
     data_di="data/tai20_5_1.txt",
     cross_prob=0.5,
@@ -20,7 +19,7 @@ def main(
     p = TFSProblem(data_dir)
     ma = MA(cross_prob, muta_prob, epoch_len, alpha, temperature)
     results = ma.search(p)
-    print(len(results))
+
     results = sorted(
         [(p.evaluate(element.sol), element) for element in results], key=lambda x: x[0]
     )

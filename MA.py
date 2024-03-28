@@ -1,4 +1,5 @@
 import numpy as np
+from tqdm.auto import tqdm
 
 from utils import Solution
 from SimulatedAnnealing import SimulatedAnnealing
@@ -20,7 +21,7 @@ class MA:
         pop = [Solution(self.problem.sol_length) for i in range(n)]
         sa = SimulatedAnnealing(self.epoch_len, self.alpha, 1)
 
-        for i in range(t):
+        for i in tqdm(range(t)):
             children_list = []
 
             for j in range(n // 2):
