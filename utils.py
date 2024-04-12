@@ -66,7 +66,7 @@ class Solution:
     def sol(self):
         return self._sol
 
-    @private_attribute.setter
+    @sol.setter
     def sol(self, sol):
         self._sol = sol
 
