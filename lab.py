@@ -3,7 +3,7 @@ import numpy as np
 from numba import jit
 from typing import Union
 
-from utils import TFSProblem, Solution
+from utils import PFSProblem, Solution
 from MA import MA
 
 
@@ -15,7 +15,7 @@ def main(
     alpha=0.9,
     temperature=3500,
 ):
-    p = TFSProblem(data_dir)
+    p = PFSProblem(data_dir)
     ma = MA(cross_prob, muta_prob, epoch_len, alpha, temperature)
     results = ma.search(p)
 

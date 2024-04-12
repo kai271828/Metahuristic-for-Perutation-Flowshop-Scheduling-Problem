@@ -20,10 +20,10 @@ class SimulatedAnnealing:
         length = self.epoch_len
         k = 0
         ffe = 0
-        record = {"per_update": [], "per_ffe": [], "temperature": []}
+        makespan_record = {"per_update": [], "per_ffe": [], "temperature": []}
 
         while temperature > self.stopcriterion:
-            record["temperature"].append(temperature)
+            makespan_record["temperature"].append(temperature)
             if verbose:
                 print(f"[Epoch {k + 1}] Current Temperature: {temperature}")
 
@@ -42,8 +42,8 @@ class SimulatedAnnealing:
 
                 if new_makespan <= old_makespan:
                     i.sol = j.sol.copy()
-                    record["per_ffe"].append(new_makespan)
-                    record["per_update"].append(new_makespan)
+                    makespan_record["per_ffe"].append(new_makespan)
+                    makespan_record["per_update"].append(new_makespan)
                     if verbose:
                         print(
                             f"Set solution to {j} since {new_makespan} is better than {old_makespan}."
@@ -52,14 +52,14 @@ class SimulatedAnnealing:
                     random_num = np.random.rand()
                     if np.exp((old_makespan - new_makespan) / temperature) > random_num:
                         i.sol = j.sol.copy()
-                        record["per_ffe"].append(new_makespan)
-                        record["per_update"].append(new_makespan)
+                        makespan_record["per_ffe"].append(new_makespan)
+                        makespan_record["per_update"].append(new_makespan)
                         if verbose:
                             print(
                                 f"Set solution to {j} but {new_makespan} is NOT better than {old_makespan} since {np.exp((old_makespan - new_makespan) / temperature)} > {random_num}."
                             )
                     else:
-                        record["per_ffe"].append(old_makespan)
+                        makespan_record["per_ffe"].append(old_makespan)
                         if verbose:
                             print(
                                 f"Didn't set anything since {np.exp((old_makespan - new_makespan) / temperature)} <= {random_num}."
@@ -69,7 +69,7 @@ class SimulatedAnnealing:
             temperature = self.calculate_control(temperature)
             length = self.calculate_length(length)
 
-        return i, k, ffe, record
+        return i, k, ffe, makespan_record
 
     def calculate_control(self, temperature):
         return temperature * self.alpha
