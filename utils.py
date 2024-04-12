@@ -51,14 +51,20 @@ class Solution:
     def __repr__(self):
         return ", ".join(map(lambda x: str(x + 1), self.sol.tolist()))
 
+    def __getitem__(self, key):
+        return self._sol[key]
+
+    def __setitem__(self, key, value):
+        self._sol[key] = value
+
     def swap_neighborhood(self, i, j):
         """
         Return a new solution obtained by swap two elements
         """
         new_sol = Solution(init_sol=self.sol.copy())
 
-        new_sol._set_sol_at(i, self.sol[j])
-        new_sol._set_sol_at(j, self.sol[i])
+        new_sol[i] = self.sol[j]
+        new_sol[j] = self.sol[i]
 
         return new_sol
 
@@ -69,6 +75,3 @@ class Solution:
     @sol.setter
     def sol(self, sol):
         self._sol = sol
-
-    def _set_sol_at(self, index, num):
-        self.sol[index] = num

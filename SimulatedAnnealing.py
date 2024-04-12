@@ -41,7 +41,7 @@ class SimulatedAnnealing:
                 new_makespan = problem.evaluate(j.sol)
 
                 if new_makespan <= old_makespan:
-                    i.set_sol(j.sol.copy())
+                    i.sol = j.sol.copy()
                     record["per_ffe"].append(new_makespan)
                     record["per_update"].append(new_makespan)
                     if verbose:
@@ -51,7 +51,7 @@ class SimulatedAnnealing:
                 else:
                     random_num = np.random.rand()
                     if np.exp((old_makespan - new_makespan) / temperature) > random_num:
-                        i.set_sol(j.sol.copy())
+                        i.sol = j.sol.copy()
                         record["per_ffe"].append(new_makespan)
                         record["per_update"].append(new_makespan)
                         if verbose:
