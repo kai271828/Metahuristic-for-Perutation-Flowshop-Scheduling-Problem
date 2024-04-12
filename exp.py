@@ -5,7 +5,7 @@ from typing import Union
 from tqdm.auto import tqdm
 from datetime import datetime
 
-from utils import TFSProblem, Solution
+from utils import PFSProblem, Solution
 from SimulatedAnnealing import SimulatedAnnealing
 
 
@@ -21,7 +21,7 @@ def main(
     verbose: bool = False,
     run_search: bool = False,
 ):
-    p = TFSProblem(data_dir)
+    p = PFSProblem(data_dir)
     sa = SimulatedAnnealing(epoch_len, alpha, stopcriterion)
 
     best = np.inf
@@ -40,7 +40,7 @@ def main(
     p_bar = range(times) if run_search else tqdm(range(times))
     for i in p_bar:
         solution, search_step, ffe, _ = sa.search(p, temperature, verbose=verbose)
-        makespan = p.evaluate(solution.sol)
+        makespan = p.evaluate(solution.get_sol())
         record.append(makespan)
         ffes.append(ffe)
 

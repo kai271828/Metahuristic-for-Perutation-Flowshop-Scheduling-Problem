@@ -16,7 +16,7 @@ class SimulatedAnnealing:
 
     def search(self, problem, temperature, init_sol=None, verbose=False):
 
-        i = Solution(problem.sol_length) if init_sol is None else init_sol
+        i = Solution(length=problem.sol_length, init_sol=init_sol)
         length = self.epoch_len
         k = 0
         ffe = 0
@@ -31,19 +31,17 @@ class SimulatedAnnealing:
                 if verbose:
                     print(f"[Step {l + 1}]")
 
-                a = np.random.randint(0, high=i.sol.shape[-1])
-                b = np.random.randint(0, high=i.sol.shape[-1])
-                if a == b:
-                    b = (a + 1) % i.sol.shape[-1]
+                # get random 2 indices
+                a, b = np.random.choice(problem.sol_length, 2, replace=False)
 
                 j = i.swap_neighborhood(a, b)
                 ffe += 1
 
                 old_makespan = problem.evaluate(i.sol)
-                new_makespan = problem.evaluate(j)
+                new_makespan = problem.evaluate(j.sol)
 
                 if new_makespan <= old_makespan:
-                    i.set_sol(j)
+                    i.set_sol(j.sol.copy())
                     record["per_ffe"].append(new_makespan)
                     record["per_update"].append(new_makespan)
                     if verbose:
@@ -53,7 +51,7 @@ class SimulatedAnnealing:
                 else:
                     random_num = np.random.rand()
                     if np.exp((old_makespan - new_makespan) / temperature) > random_num:
-                        i.set_sol(j)
+                        i.set_sol(j.sol.copy())
                         record["per_ffe"].append(new_makespan)
                         record["per_update"].append(new_makespan)
                         if verbose:
