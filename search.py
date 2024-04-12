@@ -3,7 +3,7 @@ import numpy as np
 from tqdm.auto import tqdm
 from datetime import datetime
 
-from exp import main
+from hw1 import main
 
 
 def search(
