@@ -54,6 +54,7 @@ class MemeticAlgorithm:
             pop[index] = mutated
 
         if verbose:
+            print("Original populations:")
             for p in pop:
                 print(p)
 
@@ -84,8 +85,9 @@ class MemeticAlgorithm:
 
                 random_num = np.random.random()
                 if random_num < self.mutate_prob:
-                    a, b = np.random.choice(problem.sol_length, 2, replace=False)
-                    start, end = min(a, b), max(a, b)
+                    start, end = sorted(
+                        np.random.choice(problem.sol_length, 2, replace=False)
+                    )
                     offspring_1.insertion_mutate(start, end)
 
                     if verbose:
@@ -94,8 +96,9 @@ class MemeticAlgorithm:
 
                 random_num = np.random.random()
                 if random_num < self.mutate_prob:
-                    a, b = np.random.choice(problem.sol_length, 2, replace=False)
-                    start, end = min(a, b), max(a, b)
+                    start, end = sorted(
+                        np.random.choice(problem.sol_length, 2, replace=False)
+                    )
                     offspring_2.insertion_mutate(start, end)
 
                     if verbose:
@@ -183,6 +186,10 @@ class Population:
     def size(self):
         return self._size
 
+    @property
+    def length(self):
+        return self._length
+
     def append(self, p):
         self._pop.append(p)
 
@@ -202,6 +209,23 @@ class Population:
     def crossover(self, parent_id_1, parent_id_2):
         offspring_1 = MASolution(init_sol=self._pop[parent_id_1])
         offspring_2 = MASolution(init_sol=self._pop[parent_id_2])
+
+        # Randomly select two points
+        point_1, point_2 = sorted(np.random.choice(self.length, 2, replace=False))
+
+        # Create sets to keep track of selected elements
+        selected_1 = set(offspring_1[point1:point2])
+        selected_2 = set(offspring_2[point1:point2])
+
+        # The remaining elements in parent 2 are added to offspring 1 in order, and vice versa
+        index_1 = index_2 = point_2
+        for i in range(self.length):
+            if self._pop[parent_id_2][i] not in selected_1:
+                offspring_1[index_1 % self.length] = self._pop[parent_id_2][i]
+                index_1 += 1
+            if self._pop[parent_id_1][i] not in selected_2:
+                offspring_2[index_2 % self.length] = self._pop[parent_id_1][i]
+                index_2 += 1
 
         return offspring_1, offspring_2
 
