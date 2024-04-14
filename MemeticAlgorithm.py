@@ -186,7 +186,6 @@ class Population:
 
     def evaluate_and_sort(self, problem):
         for p in self._pop:
-            print("Dubug", p)
             if not hasattr(p, "makespan"):
                 p.makespan = problem.evaluate(p)
 
