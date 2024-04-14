@@ -8,6 +8,7 @@ from SimulatedAnnealing import SimulatedAnnealing
 class MemeticAlgorithm:
     def __init__(
         self,
+        init_k=2,
         init_ls=None,
         init_ls_ratio=0.2,
         tournament_k=2,
@@ -32,7 +33,7 @@ class MemeticAlgorithm:
     def search(self, problem, p_size=20, num_iter=10):
 
         # Initialization
-        pop = Population(problem=problem, size=p_size)
+        pop = Population(size=p_size, init_k=init_k)
 
         # mutate offspring of local search of some initial solution
         mutate_indices = np.random.choice(
@@ -115,8 +116,8 @@ class MASolution(Solution):
 class Population:
     def __init__(
         self,
-        size=20,
-        init_k=5,
+        size,
+        init_k,
     ):
         # best N from kN random solutions
         self._pop = []
