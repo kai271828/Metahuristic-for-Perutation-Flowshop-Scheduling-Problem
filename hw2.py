@@ -24,10 +24,10 @@ def main(
 ):
     p = PFSProblem(data_dir)
     init_sa = SimulatedAnnealing(
-        init_ls_temperature, init_ls_epoch_len, init_ls_epoch_alpha
+        init_ls_temperature, init_ls_epoch_len, init_ls_epoch_alpha, 1
     )
     end_sa = SimulatedAnnealing(
-        end_ls_temperature, end_ls_epoch_len, end_ls_epoch_alpha
+        end_ls_temperature, end_ls_epoch_len, end_ls_epoch_alpha, 1
     )
     ma = MemeticAlgorithm(
         init_ls=init_sa,
