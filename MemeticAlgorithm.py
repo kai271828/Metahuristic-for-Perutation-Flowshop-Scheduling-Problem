@@ -145,8 +145,8 @@ class MASolution(Solution):
         self[k] = temp
 
     def insertion_mutate(self, start, end):
-        """Mutate the solution by insertion
-        start index sould less than end index"""
+        """Mutate the solution by insertion.
+        Start index sould less than end index"""
         temp = self[start]
         for i in range(start, end):
             if i + 1 < len(self.sol):
@@ -171,10 +171,6 @@ class Population:
         temp.sort(key=lambda x: problem.evaluate(x))
 
         self._pop = temp[: (self._size)]
-
-        assert (
-            len(self._pop) == self._size
-        ), "There are some bugs in your init of Population"
 
     def __getitem__(self, key):
         return self._pop[key]
@@ -229,5 +225,6 @@ class Population:
         return offspring_1, offspring_2
 
     def environmental_select(self):
-        """Select the best k=self.size solution to survive"""
+        """Select the best self.size solutions to survive"""
+        # TODO: Common environmental selection
         self._pop = self._pop[: self.size]
