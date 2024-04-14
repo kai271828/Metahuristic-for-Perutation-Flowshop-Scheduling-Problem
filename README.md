@@ -24,10 +24,10 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a> -->
 
-  <h3 align="center">Perutation Flowshop Scheduling using Simulated Annealing</h3>
+  <h3 align="center">Metahuristic for Perutation Flowshop Scheduling  Problem</h3>
 
   <p align="center">
-    Implemented in Python
+    Simulated Annealing & Memetic Algorithm Implemented in Python
     <!-- <br />
     <a href="https://github.com/kai271828"><strong>Explore the docs »</strong></a>
     <br />
@@ -81,7 +81,7 @@
 
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com)-->
 
-This repository is for the first homework assignment of the Meta-heuristics and Problem Solving course at NTNU in the spring semester of 2024.
+This repository is for the homework assignments of the Meta-heuristics and Problem Solving course at NTNU in the spring semester of 2024.
 
 
 
@@ -136,10 +136,10 @@ Install packages through pip.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-### Search minimum makespan with specific parameters
+### HW1. Search minimum makespan using simulated annealing
 Here is an example:
 ```sh
-python exp.py \
+python hw1.py \
     --data_dir "data/tai20_5_1.txt" \
     --epoch_len 1 \
     --alpha 0.99 \
@@ -177,12 +177,55 @@ python search.py \
     --search_times 10000 \
     --metric "avg"
 ```
-Most parameters are quite similar to above except you should give a range [min, max).
+Most parameters are quite similar to above except you should give a range [min_SOME_PARAMETER, max_SOME_PARAMETER).
 |  Parameter   | Description  |
 |  ----  | ----  |
-| search_times  | The number of configurations searched. |
+| search_times  | The number of configurations to search. |
 | metric  | How to evaluate the result. {"best", "avg", "worst"}, default to "avg"  |
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+### HW2. Search minimum makespan using memetic algorithm
+Here is an example:
+```sh
+python hw2.py \
+    --data_dir "data/tai20_5_1.txt" \
+    --init_sa_temperature 10000 \
+    --init_sa_epoch_len 5 \
+    --init_sa_alpha 0.9 \
+    --init_sa_ratio 0.2 \
+    --population_size 20 \
+    --init_k 5 \
+    --tournament_k 2 \
+    --offspring_m 2 \
+    --mutate_prob 0.2 \
+    --end_sa_temperature 3000 \
+    --end_sa_epoch_len 15 \
+    --end_sa_alpha 0.98 \
+    --end_sa_ratio 0.2 \
+    --num_iter 10 \
+
+```
+
+|  Parameter   | Description  |
+|  ----  | ----  |
+| data_dir  | Path to the input file. |
+| init_sa_temperature  | Parameter using in the initail SA. See above description for detail.  |
+| init_sa_epoch_len  | Parameter using in the initail SA. See above description for detail.  |
+| init_sa_alpha  | Parameter using in the initail SA. See above description for detail.  |
+| init_sa_ratio  | Decide how many initial solutions will do the initial SA. |
+| population_size  | The size of the population in the evolutionary algorithm (EA).  |
+| init_k  | Initialize init_k * population_size solution and select the top ones. |
+| tournament_k  | Conduct k tournament as mating selection. |
+| offspring_m  | Generate m times the number of offspring as parents. |
+| mutate_prob  | The probability of the mutation of each offspring generated. |
+| end_sa_temperature  | Parameter of SA using in the end of iteration. See above description for detail. |
+| end_sa_epoch_len  | Parameter of SA using in the end of iteration. See above description for detail. |
+| end_sa_alpha  | Parameter of SA using in the end of iteration. See above description for detail. |
+| end_sa_ratio  | Decide how many worst solutions will do the end of iteration SA. |
+| num_iter  | The number of iteration of memetic algorithm.  |
+| verbose  | Weather to show the experiment detail. Default to False.  |
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
