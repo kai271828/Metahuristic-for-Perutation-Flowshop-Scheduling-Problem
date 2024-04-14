@@ -80,7 +80,7 @@ class MemeticAlgorithm:
                 offspring_1, offspring_2 = pop.crossover(parent_id_1, parent_id_2)
 
                 if verbose:
-                    print(f"Offspring 1: {offspring_1}\nOffspring 2: {offspring_2}")
+                    print(f"Offspring 1: {offspring_1}\nOffspring 2: {offspring_2}\n")
 
                 random_num = np.random.random()
                 if random_num < self.mutate_prob:
@@ -89,7 +89,7 @@ class MemeticAlgorithm:
                     offspring_1.insertion_mutate(start, end)
 
                     if verbose:
-                        print(f"Offspring 1 mutated: {offspring_1}")
+                        print(f"Offspring 1 mutated: {offspring_1}\n")
                 pop.append(offspring_1)
 
                 random_num = np.random.random()
@@ -99,7 +99,7 @@ class MemeticAlgorithm:
                     offspring_2.insertion_mutate(start, end)
 
                     if verbose:
-                        print(f"Offspring 2 mutated: {offspring_2}")
+                        print(f"Offspring 2 mutated: {offspring_2}\n")
 
                 pop.append(offspring_2)
 
@@ -109,7 +109,7 @@ class MemeticAlgorithm:
             if verbose:
                 print("After evaluation:")
                 for p in pop:
-                    print(f"Solutino: {p}\nMakespan: {p.makespan}\n\n")
+                    print(f"Solution: {p}\nMakespan: {p.makespan}\n\n")
 
             # Environmental selection
             pop.environmental_select()
@@ -117,7 +117,7 @@ class MemeticAlgorithm:
             if verbose:
                 print("After environmental selection:")
                 for p in pop:
-                    print(f"Solutino: {p}\nMakespan: {p.makespan}\n\n")
+                    print(f"Solution: {p}\nMakespan: {p.makespan}\n\n")
 
             # Local search
             # move operator should not be the same as crossover and mutation
