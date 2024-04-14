@@ -12,13 +12,11 @@ class MemeticAlgorithm:
         init_ls_ratio=0.2,
         tournament_k=2,
         offspring_m=2,
-        cross_prob=0.5,
         mutate_prob=0.2,
         end_ls=None,
         end_ls_ratio=0.2,
     ):
         self.tournament_k = tournament_k
-        self.cross_prob = cross_prob
         self.mutate_prob = mutate_prob
         self.init_ls_ratio = init_ls_ratio
         assert (

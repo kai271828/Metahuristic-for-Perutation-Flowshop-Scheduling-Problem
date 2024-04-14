@@ -3,27 +3,48 @@ import numpy as np
 from numba import jit
 from typing import Union
 
-from utils import PFSProblem, Solution
-from MA import MA
+from utils import PFSProblem
+from SimulatedAnnealing import SimulatedAnnealing
+from MemeticAlgorithm import MemeticAlgorithm
 
 
 def main(
     data_dir="data/tai20_5_1.txt",
-    cross_prob=0.5,
-    muta_prob=0.2,
-    epoch_len=10,
-    alpha=0.9,
-    temperature=3500,
+    init_ls_temperature=5000,
+    init_ls_epoch_len=10,
+    init_ls_epoch_alpha=0.98,
+    init_ls_ratio=0.2,
+    tournament_k=2,
+    offspring_m=2,
+    mutate_prob=0.2,
+    end_ls_temperature=5000,
+    end_ls_epoch_len=10,
+    end_ls_epoch_alpha=0.98,
+    end_ls_ratio=0.2,
 ):
     p = PFSProblem(data_dir)
-    ma = MA(cross_prob, muta_prob, epoch_len, alpha, temperature)
-    results = ma.search(p)
-
-    results = sorted(
-        [(p.evaluate(element), element) for element in results], key=lambda x: x[0]
+    init_sa = SimulatedAnnealing(
+        init_ls_temperature, init_ls_epoch_len, init_ls_epoch_alpha
     )
-    for result in results:
-        print(result)
+    end_sa = SimulatedAnnealing(
+        end_ls_temperature, end_ls_epoch_len, end_ls_epoch_alpha
+    )
+    ma = MemeticAlgorithm(
+        init_ls=init_sa,
+        init_ls_ratio=init_ls_ratio,
+        tournament_k=tournament_k,
+        offspring_m=offspring_m,
+        mutate_prob=mutate_prob,
+        end_ls=end_sa,
+        end_ls_ratio=0.2,
+    )
+
+    results = ma.search(p, p_size=20, num_iter=10)
+    results.evaluate_and_sort()
+
+    for i, result in enumerate(results):
+        print(f"{i}-th solution:{solution}")
+        print(f"Makespan:{solutin.makespan}\n")
 
 
 if __name__ == "__main__":
