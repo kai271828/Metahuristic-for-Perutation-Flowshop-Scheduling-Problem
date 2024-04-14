@@ -52,7 +52,7 @@ class MemeticAlgorithm:
             pop[index] = mutated
 
         # Evaluation
-        pop.evaluate_and_sort()
+        pop.evaluate_and_sort(problem=problem)
 
         for i in tqdm(range(num_iter)):
             # Reproduction
@@ -81,7 +81,7 @@ class MemeticAlgorithm:
                 pop.append(offspring_2)
 
             # Evaluation
-            pop.evaluate_and_sort()
+            pop.evaluate_and_sort(problem=problem)
 
             # Environmental selection
             pop.environmental_select()
