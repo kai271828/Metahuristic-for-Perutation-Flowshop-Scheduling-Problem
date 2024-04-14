@@ -55,7 +55,7 @@ class PFSProblem:
 
         result = self.lib.evaluate(
             sol.sol,
-            self.mj_table,
+            self.mj_table.astype(np.uintp),
             self.num_machines,
             self.num_jobs,
         )
