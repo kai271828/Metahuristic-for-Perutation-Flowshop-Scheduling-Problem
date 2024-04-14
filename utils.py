@@ -68,27 +68,27 @@ class PFSProblem:
 class Solution:
     def __init__(self, length=20, init_sol=None):
         if init_sol is not None:
-            self._sol = init_sol.copy()
+            self.sol = init_sol.sol.copy()
         else:
-            self._sol = np.random.permutation(length)
+            self.sol = np.random.permutation(length)
 
     def __repr__(self):
-        return ", ".join(map(lambda x: str(x + 1), self.sol.tolist()))
+        return ", ".join(map(lambda x: str(x), self.sol.tolist()))
 
     def __getitem__(self, key):
-        return self._sol[key]
+        return self.sol[key]
 
     def __setitem__(self, key, value):
-        self._sol[key] = value
+        self.sol[key] = value
 
     def swap_neighborhood(self, i, j):
         """
         Return a new solution obtained by swap two elements
         """
-        new_sol = Solution(init_sol=self.sol.copy())
+        new_sol = Solution(init_sol=self)
 
-        new_sol[i] = self.sol[j]
-        new_sol[j] = self.sol[i]
+        new_sol[i] = self[j]
+        new_sol[j] = self[i]
 
         return new_sol
 
