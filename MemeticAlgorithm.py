@@ -36,9 +36,7 @@ class MemeticAlgorithm:
     def search(self, problem, num_iter=10):
 
         # Initialization
-        pop = Population(
-            size=self.p_size, length=problem.sol_length, init_k=self.init_k
-        )
+        pop = Population(size=self.p_size, problem=problemf, init_k=self.init_k)
 
         # mutate offspring of local search of some initial solution
         mutate_indices = np.random.choice(
@@ -122,17 +120,17 @@ class Population:
     def __init__(
         self,
         size,
-        length,
+        problem,
         init_k,
     ):
         # best N from kN random solutions
         self._pop = []
         self._size = size
-        self._length = length
+        self._length = problem.sol_length
 
-        temp = [MASolution(length=length) for i in range(self._size * init_k)]
+        temp = [MASolution(length=self._length) for i in range(self._size * init_k)]
 
-        temp.sort(key=lambda x: self._problem.evaluate(x))
+        temp.sort(key=lambda x: problem.evaluate(x))
 
         self._pop = temp[: (self._size)]
 
