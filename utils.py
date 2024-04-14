@@ -49,12 +49,16 @@ class PFSProblem:
         #             )
 
         # return machine_cache[-1]
-        return self.lib.evaluate(
+
+        result = self.lib.evaluate(
             sol.sol,
             self.mj_table,
             self.num_machines,
             self.num_jobs,
         )
+
+        print(f"Evaluate result: {result}")
+        return result
 
 
 class Solution:
