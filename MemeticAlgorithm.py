@@ -85,7 +85,7 @@ class MemeticAlgorithm:
                 random_num = np.random.random()
                 if random_num < self.mutate_prob:
                     a, b = np.random.choice(problem.sol_length, 2, replace=False)
-                    start, end = np.min(a, b), np.max(a, b)
+                    start, end = min(a, b), max(a, b)
                     offspring_1.insertion_mutate(start, end)
 
                     if verbose:
@@ -95,7 +95,7 @@ class MemeticAlgorithm:
                 random_num = np.random.random()
                 if random_num < self.mutate_prob:
                     a, b = np.random.choice(problem.sol_length, 2, replace=False)
-                    start, end = np.min(a, b), np.max(a, b)
+                    start, end = min(a, b), max(a, b)
                     offspring_2.insertion_mutate(start, end)
 
                     if verbose:
