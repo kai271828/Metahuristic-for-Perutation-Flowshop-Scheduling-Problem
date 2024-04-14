@@ -49,7 +49,7 @@ class MemeticAlgorithm:
             i, j, k = np.random.choice(problem.sol_length, 3, replace=False)
             mutated = MASolution(init_sol=ls_result).swap_3_mutate(i, j, k)
 
-            pop[i] = mutated
+            pop[index] = mutated
 
         # Evaluation
         pop.evaluate_and_sort()
