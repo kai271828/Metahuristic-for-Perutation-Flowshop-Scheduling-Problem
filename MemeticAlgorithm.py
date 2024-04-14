@@ -21,6 +21,7 @@ class MemeticAlgorithm:
         self.p_size = p_size
         self.init_k = init_k
         self.tournament_k = tournament_k
+        self.offspring_m = offspring_m
         self.mutate_prob = mutate_prob
         self.init_ls_ratio = init_ls_ratio
         assert (
@@ -69,7 +70,7 @@ class MemeticAlgorithm:
                     print(f"Solutino: {p}\nMakespan: {p.makespan}\n\n")
 
             # Reproduction
-            for j in range(int(pop.size // 2 * offspring_m)):
+            for j in range(int(pop.size // 2 * self.offspring_m)):
                 # Mating selection (tournament selection)
                 parent_id_1 = pop.k_tournament(self.tournament_k)
                 parent_id_2 = pop.k_tournament(self.tournament_k)
