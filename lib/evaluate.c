@@ -2,11 +2,15 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-static inline int64_t max(int64_t x, int64_t y) {
-    return x > y ? x : y;
-}
+#define max(a, b) ({ \
+    typeof (a) _a = (a); \
+    typeof (b) _b = (b); \
+    _a > _b ? _a : _b; \
+})
 
 int64_t evaluate(int64_t *sol, int64_t **mj_table, int64_t num_machines, int64_t num_jobs) {
+    printf("start evaluate.so\n");
+    
     int64_t *machine_cache = (int64_t*)calloc(num_machines, sizeof(int64_t));
 
     for (int i = 0; i < num_jobs; i++) {
