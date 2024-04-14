@@ -49,6 +49,7 @@ class PFSProblem:
         #             )
 
         # return machine_cache[-1]
+        print("start evaluate")
 
         result = self.lib.evaluate(
             sol.sol,
