@@ -204,8 +204,7 @@ python hw2.py \
     --end_sa_epoch_len 15 \
     --end_sa_alpha 0.98 \
     --end_sa_ratio 0.2 \
-    --num_iter 10 \
-
+    --num_iter 10 
 ```
 
 |  Parameter   | Description  |
