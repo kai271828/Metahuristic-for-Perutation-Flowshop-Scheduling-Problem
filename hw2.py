@@ -47,7 +47,7 @@ def main(
     results.evaluate_and_sort(problem=p)
 
     for i, result in enumerate(results):
-        print(f"{i}-th solution:{result}")
+        print(f"{i + 1}-th solution:{result}")
         print(f"Makespan:{result.makespan}\n")
 
 
