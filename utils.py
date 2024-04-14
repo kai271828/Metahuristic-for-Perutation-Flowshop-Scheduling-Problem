@@ -51,22 +51,18 @@ class PFSProblem:
         #             )
 
         # return machine_cache[-1]
-        print("start evaluate")
 
         mj_table_ptr = (
             self.mj_table.__array_interface__["data"][0]
             + np.arange(self.mj_table.shape[0]) * self.mj_table.strides[0]
         ).astype(np.uintp)
 
-        result = self.lib.evaluate(
+        return self.lib.evaluate(
             sol.sol,
             mj_table_ptr,
             self.num_machines,
             self.num_jobs,
         )
-
-        print(f"Evaluate result: {result}")
-        return result
 
 
 class Solution:
