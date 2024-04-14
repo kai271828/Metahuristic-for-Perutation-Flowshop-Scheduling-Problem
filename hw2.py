@@ -22,6 +22,7 @@ def main(
     end_ls_epoch_len=10,
     end_ls_epoch_alpha=0.98,
     end_ls_ratio=0.2,
+    num_iter=10,
     verbose: bool = False,
 ):
     p = PFSProblem(data_dir)
@@ -43,7 +44,7 @@ def main(
         end_ls_ratio=end_ls_ratio,
     )
 
-    results = ma.search(p, num_iter=10, verbose=verbose)
+    results = ma.search(p, num_iter=num_iter, verbose=verbose)
     results.evaluate_and_sort(problem=p)
 
     for i, result in enumerate(results):
