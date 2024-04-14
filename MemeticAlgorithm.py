@@ -36,7 +36,7 @@ class MemeticAlgorithm:
     def search(self, problem, num_iter=10):
 
         # Initialization
-        pop = Population(size=self.p_size, problem=problemf, init_k=self.init_k)
+        pop = Population(size=self.p_size, problem=problem, init_k=self.init_k)
 
         # mutate offspring of local search of some initial solution
         mutate_indices = np.random.choice(
