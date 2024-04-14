@@ -121,7 +121,9 @@ class MemeticAlgorithm:
 
             # Local search
             # move operator should not be the same as crossover and mutation
-            for j in range(p_size - int(p_size * self.end_ls_ratio), p_size):
+            for j in range(
+                self.p_size - int(self.p_size * self.end_ls_ratio), self.p_size
+            ):
                 solution, _, _, record = self.end_ls.search(problem, init_sol=pop[j])
                 solution.makespan = record["per_ffe"][-1]
                 pop[j] = solution
