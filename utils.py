@@ -99,3 +99,11 @@ class Solution:
     @sol.setter
     def sol(self, sol):
         self._sol = sol
+
+    @property
+    def makespan(self):
+        return self.new_makespan
+
+    @makespan.setter
+    def makespan(self, makespan):
+        self._makespan = makespan
