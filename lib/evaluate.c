@@ -6,7 +6,7 @@ static inline int32_t max(int x, int y) {
     return x > y ? x : y;
 }
 
-int32_t evaluate(int32_t *sol, , int32_t **mj_table, int32_t num_machines, int32_t num_jobsf) {
+int32_t evaluate(int32_t *sol, int32_t **mj_table, int32_t num_machines, int32_t num_jobsf) {
     int32_t *machine_cache = (int32_t*)calloc(num_machines, sizeof(int32_t));
 
     for (int i = 0; i < num_jobs; i++) {
