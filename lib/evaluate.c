@@ -26,5 +26,6 @@ int64_t evaluate(int64_t *sol, int64_t **mj_table, int64_t num_machines, int64_t
     int64_t makespan = machine_cache[num_machines - 1];
     free(machine_cache);
 
+    printf("finish evaluate.so\n");
     return makespan;
 }
