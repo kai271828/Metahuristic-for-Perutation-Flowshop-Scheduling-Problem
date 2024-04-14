@@ -15,8 +15,10 @@ int64_t evaluate(int64_t *sol, int64_t **mj_table, int64_t num_machines, int64_t
 
     for (uint64_t i = 0; i < num_jobs; i++)
     {
-
-        printf("%ld ", sol[i]);
+        for (uint64_t j = 0; j < num_machines; j++)
+        {
+            printf("%ld ", mj_table[j][i]);
+        }
         printf("\n");
     }
 

@@ -8,7 +8,9 @@ class PFSProblem:
         self.lib.evaluate.restype = ctypes.c_int64
         self.lib.evaluate.argtypes = [
             np.ctypeslib.ndpointer(dtype=np.int64, ndim=1, flags="C_CONTIGUOUS"),
-            np.ctypeslib.ndpointer(dtype=np.int64, ndim=2, flags="C_CONTIGUOUS"),
+            np.ctypeslib.ndpointer(
+                dtype=np.uintp, ndim=1, flags="C"
+            ),  # np.ctypeslib.ndpointer(dtype=np.int64, ndim=2, flags="C_CONTIGUOUS"),
             ctypes.c_int64,
             ctypes.c_int64,
         ]
