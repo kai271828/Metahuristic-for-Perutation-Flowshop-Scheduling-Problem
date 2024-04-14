@@ -10,7 +10,7 @@
 
 int64_t evaluate(int64_t *sol, int64_t **mj_table, int64_t num_machines, int64_t num_jobs)
 {
-    printf("num_machines: %ld, num_jobs: %ld\n", &num_machines, &num_jobs);
+    printf("num_machines: %ld, num_jobs: %ld\n", num_machines, num_jobs);
 
     int64_t *machine_cache = (int64_t *)calloc(num_machines, sizeof(int64_t));
 
@@ -19,7 +19,7 @@ int64_t evaluate(int64_t *sol, int64_t **mj_table, int64_t num_machines, int64_t
         for (uint64_t machine_id = 0; machine_id < num_machines; machine_id++)
         {
 
-            printf("i: %lu, machine_id: %lu\n", &i, &machine_id);
+            printf("i: %lu, machine_id: %lu\n", i, machine_id);
 
             if (machine_id != 0)
             {
