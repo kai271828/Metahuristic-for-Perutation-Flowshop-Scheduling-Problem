@@ -17,6 +17,7 @@ class MemeticAlgorithm:
         end_ls=None,
         end_ls_ratio=0.2,
     ):
+        self.init_k = init_k
         self.tournament_k = tournament_k
         self.mutate_prob = mutate_prob
         self.init_ls_ratio = init_ls_ratio
@@ -33,7 +34,7 @@ class MemeticAlgorithm:
     def search(self, problem, p_size=20, num_iter=10):
 
         # Initialization
-        pop = Population(size=p_size, init_k=init_k)
+        pop = Population(size=p_size, init_k=self.init_k)
 
         # mutate offspring of local search of some initial solution
         mutate_indices = np.random.choice(
