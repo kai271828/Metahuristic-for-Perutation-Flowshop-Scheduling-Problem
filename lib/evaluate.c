@@ -2,22 +2,31 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-#define max(a, b) ({ \
-    typeof (a) _a = (a); \
-    typeof (b) _b = (b); \
-    _a > _b ? _a : _b; \
+#define max(a, b) ({    \
+    typeof(a) _a = (a); \
+    typeof(b) _b = (b); \
+    _a > _b ? _a : _b;  \
 })
 
-int64_t evaluate(int64_t *sol, int64_t **mj_table, int64_t num_machines, int64_t num_jobs) {
-    printf("start evaluate.so\n");
-    
-    int64_t *machine_cache = (int64_t*)calloc(num_machines, sizeof(int64_t));
+int64_t evaluate(int64_t *sol, int64_t **mj_table, int64_t num_machines, int64_t num_jobs)
+{
+    printf("num_machines: %lld, num_jobs: %lld\n", &num_machines, &num_jobs);
 
-    for (int i = 0; i < num_jobs; i++) {
-        for (int machine_id = 0; machine_id < num_machines; machine_id++) {
-            if (machine_id != 0) {
+    int64_t *machine_cache = (int64_t *)calloc(num_machines, sizeof(int64_t));
+
+    for (uint64_t i = 0; i < num_jobs; i++)
+    {
+        for (uint64_t machine_id = 0; machine_id < num_machines; machine_id++)
+        {
+
+            printf("i: %llu, machine_id: %llu\n", &i, &machine_id);
+
+            if (machine_id != 0)
+            {
                 machine_cache[machine_id] = max(machine_cache[machine_id - 1], machine_cache[machine_id]) + mj_table[machine_id][sol[i]];
-            } else {
+            }
+            else
+            {
                 machine_cache[machine_id] = machine_cache[machine_id] + mj_table[machine_id][sol[i]];
             }
         }

@@ -13,12 +13,6 @@ class PFSProblem:
             ctypes.c_int64,
         ]
 
-        def error_check(result, func, args):
-            if result != 0:
-                print(f"Error occurred during function call: {result}")
-
-        self.lib.evaluate.errcheck = error_check
-
         with open(input_dir) as input_file:
             num_jobs, num_machines, _ = input_file.readline().split()
 
