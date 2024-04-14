@@ -22,6 +22,7 @@ def main(
     end_ls_epoch_len=10,
     end_ls_epoch_alpha=0.98,
     end_ls_ratio=0.2,
+    verbose: bool = False,
 ):
     p = PFSProblem(data_dir)
     init_sa = SimulatedAnnealing(
@@ -42,7 +43,7 @@ def main(
         end_ls_ratio=end_ls_ratio,
     )
 
-    results = ma.search(p, num_iter=10)
+    results = ma.search(p, num_iter=10, verbose=verbose)
     results.evaluate_and_sort()
 
     for i, result in enumerate(results):
