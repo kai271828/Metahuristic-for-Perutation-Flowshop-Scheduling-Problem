@@ -5,7 +5,7 @@ import numpy as np
 class PFSProblem:
     def __init__(self, input_dir, lib_dir="lib/evaluate.so"):
         self.lib = ctypes.CDLL(lib_dir)
-        self.lib.evaluate.restype = ctypes.c_int32
+        self.lib.evaluate.restype = ctypes.c_int64
         self.lib.evaluate.argtypes = [
             np.ctypeslib.ndpointer(dtype=np.int64, ndim=1, flags="C_CONTIGUOUS"),
             np.ctypeslib.ndpointer(dtype=np.int64, ndim=2, flags="C_CONTIGUOUS"),
