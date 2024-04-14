@@ -47,7 +47,8 @@ class MemeticAlgorithm:
             ls_result, _, _, _ = self.init_ls.search(problem, init_sol=pop[index])
 
             i, j, k = np.random.choice(problem.sol_length, 3, replace=False)
-            mutated = MASolution(init_sol=ls_result).swap_3_mutate(i, j, k)
+            mutated = MASolution(init_sol=ls_result)
+            mutated.swap_3_mutate(i, j, k)
 
             pop[index] = mutated
 
