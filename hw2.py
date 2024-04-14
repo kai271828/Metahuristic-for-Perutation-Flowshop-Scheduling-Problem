@@ -48,7 +48,7 @@ def main(
 
     for i, result in enumerate(results):
         print(f"{i}-th solution:{solution}")
-        print(f"Makespan:{solutin.makespan}\n")
+        print(f"Makespan:{solution.makespan}\n")
 
 
 if __name__ == "__main__":
