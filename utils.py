@@ -102,7 +102,7 @@ class Solution:
 
     @property
     def makespan(self):
-        return self.new_makespan
+        return self._makespan
 
     @makespan.setter
     def makespan(self, makespan):
