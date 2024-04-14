@@ -44,7 +44,7 @@ def main(
     )
 
     results = ma.search(p, num_iter=10, verbose=verbose)
-    results.evaluate_and_sort()
+    results.evaluate_and_sort(problem=p)
 
     for i, result in enumerate(results):
         print(f"{i}-th solution:{solution}")
