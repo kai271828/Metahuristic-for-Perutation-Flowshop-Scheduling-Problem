@@ -214,8 +214,8 @@ class Population:
         point_1, point_2 = sorted(np.random.choice(self.length, 2, replace=False))
 
         # Create sets to keep track of selected elements
-        selected_1 = set(offspring_1[point1:point2])
-        selected_2 = set(offspring_2[point1:point2])
+        selected_1 = set(offspring_1[point_1:point_2])
+        selected_2 = set(offspring_2[point_1:point_2])
 
         # The remaining elements in parent 2 are added to offspring 1 in order, and vice versa
         index_1 = index_2 = point_2
