@@ -38,7 +38,7 @@ class SimulatedAnnealing:
                 ffe += 1
 
                 old_makespan = (
-                    i.makespan if hasattr(i, makespan) else problem.evaluate(i)
+                    i.makespan if hasattr(i, "makespan") else problem.evaluate(i)
                 )
                 new_makespan = problem.evaluate(j)
 
