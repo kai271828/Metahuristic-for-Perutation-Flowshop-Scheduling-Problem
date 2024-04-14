@@ -33,7 +33,7 @@ class MemeticAlgorithm:
         ), "You have to assign an end_ls object with 'search(problem, init_sol=...)' method"
         self.end_ls = end_ls
 
-    def search(self, problem, num_iter=10):
+    def search(self, problem, num_iter=10, verbose=False):
 
         # Initialization
         pop = Population(size=self.p_size, problem=problem, init_k=self.init_k)
@@ -51,10 +51,22 @@ class MemeticAlgorithm:
 
             pop[index] = mutated
 
-        # Evaluation
-        pop.evaluate_and_sort(problem=problem)
+        if verbose:
+            for p in pop:
+                print(p)
 
         for i in tqdm(range(num_iter)):
+            if verbose:
+                print(f"[Iteration {i + 1}]")
+
+            # Evaluation
+            pop.evaluate_and_sort(problem=problem)
+
+            if verbose:
+                print("After evaluation:")
+                for p in pop:
+                    print(f"Solutino: {p}\nMakespan: {p.makespan}\n\n")
+
             # Reproduction
             for j in range(int(pop.size // 2 * offspring_m)):
                 # Mating selection (tournament selection)
@@ -65,11 +77,17 @@ class MemeticAlgorithm:
                 # order/linear order/partially-mapped crossover/cycle crossover
                 offspring_1, offspring_2 = pop.crossover(parent_id_1, parent_id_2)
 
+                if verbose:
+                    print(f"Offspring 1: {offspring_1}\nOffspring 2: {offspring_2}")
+
                 random_num = np.random.random()
                 if random_num < self.mutate_prob:
                     a, b = np.random.choice(problem.sol_length, 2, replace=False)
                     start, end = np.min(a, b), np.max(a, b)
                     offspring_1.insertion_mutate(start, end)
+
+                    if verbose:
+                        print(f"Offspring 1 mutated: {offspring_1}")
                 pop.append(offspring_1)
 
                 random_num = np.random.random()
@@ -78,13 +96,26 @@ class MemeticAlgorithm:
                     start, end = np.min(a, b), np.max(a, b)
                     offspring_2.insertion_mutate(start, end)
 
+                    if verbose:
+                        print(f"Offspring 2 mutated: {offspring_2}")
+
                 pop.append(offspring_2)
 
             # Evaluation
             pop.evaluate_and_sort(problem=problem)
 
+            if verbose:
+                print("After evaluation:")
+                for p in pop:
+                    print(f"Solutino: {p}\nMakespan: {p.makespan}\n\n")
+
             # Environmental selection
             pop.environmental_select()
+
+            if verbose:
+                print("After environmental selection:")
+                for p in pop:
+                    print(f"Solutino: {p}\nMakespan: {p.makespan}\n\n")
 
             # Local search
             # move operator should not be the same as crossover and mutation
