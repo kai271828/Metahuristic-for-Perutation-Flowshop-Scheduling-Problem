@@ -9,7 +9,7 @@ from utils import PFSProblem, Solution
 from SimulatedAnnealing import SimulatedAnnealing
 
 
-@jit
+# @jit
 def main(
     data_dir: str = "data/tai20_5_1.txt",
     epoch_len: int = 1,
