@@ -51,9 +51,9 @@ class PFSProblem:
         # return machine_cache[-1]
         return self.lib.evaluate(
             sol,
-            mj_table,
-            num_machines,
-            num_jobs,
+            self.mj_table,
+            self.num_machines,
+            self.num_jobs,
         )
 
 
