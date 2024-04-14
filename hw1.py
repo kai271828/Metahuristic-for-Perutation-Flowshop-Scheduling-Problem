@@ -1,6 +1,5 @@
 import fire
 import numpy as np
-from numba import jit
 from typing import Union
 from tqdm.auto import tqdm
 from datetime import datetime
@@ -9,7 +8,6 @@ from utils import PFSProblem, Solution
 from SimulatedAnnealing import SimulatedAnnealing
 
 
-# @jit
 def main(
     data_dir: str = "data/tai20_5_1.txt",
     epoch_len: int = 1,

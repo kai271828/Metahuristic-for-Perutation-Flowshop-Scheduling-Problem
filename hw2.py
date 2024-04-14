@@ -1,6 +1,5 @@
 import fire
 import numpy as np
-from numba import jit
 from typing import Union
 
 from utils import PFSProblem

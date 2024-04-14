@@ -1,4 +1,3 @@
 fire
 numpy
 tqdm
-numba
