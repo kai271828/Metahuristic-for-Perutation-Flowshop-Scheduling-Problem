@@ -1,6 +1,5 @@
 import ctypes
 import numpy as np
-from SimulatedAnnealing import SimulatedAnnealing
 
 
 class PFSProblem:
@@ -92,43 +91,3 @@ class Solution:
     @sol.setter
     def sol(self, sol):
         self._sol = sol
-
-
-class Population:
-    def __init__(
-        self,
-        problem,
-        size=20,
-        k=5,
-        sa_ratio=0.2,
-        sa_temperature=5000,
-        sa_epoch_length=15,
-        sa_alpha=0.98,
-        sa_stopcriterion=1,
-    ):
-        # mutated offsprings from local search + best N from kN random solutions
-        self._pop = []
-
-        sa_num = int(size * sa_ratio)
-        temp = [Solution(length=problem.sol_length) for i in range(sa_num)]
-        sa = SimulatedAnnealing(sa_epoch_length, sa_alpha, sa_stopcriterion)
-
-        for p in temp:
-            sa_p, _, _, _ = sa.search(problem, temperature, init_sol=p)
-            self._pop.append(sa_p)
-
-        temp = [Solution(length=problem.sol_length) for i in range(size * k)]
-        temp.sort(key=lambda x: problem.evaluate(x))
-
-        self._pop.extend(temp[: (size - sa_num)])
-
-        assert len(self._pop) == size, "There are some bugs in your init of Population"
-
-    def __getitem__(self, key):
-        return self._pop[key]
-
-    def __setitem__(self, key, value):
-        self._pop[key] = value
-
-    def evaluate(self):
-        pass
