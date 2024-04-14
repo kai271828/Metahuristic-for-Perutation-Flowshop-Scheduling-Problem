@@ -22,7 +22,7 @@ def main(
     run_search: bool = False,
 ):
     p = PFSProblem(data_dir)
-    sa = SimulatedAnnealing(epoch_len, alpha, stopcriterion)
+    sa = SimulatedAnnealing(temperature, epoch_len, alpha, stopcriterion)
 
     best = np.inf
     best_sol = None
