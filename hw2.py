@@ -14,6 +14,8 @@ def main(
     init_ls_epoch_len=10,
     init_ls_epoch_alpha=0.98,
     init_ls_ratio=0.2,
+    population_size=20,
+    init_k=5,
     tournament_k=2,
     offspring_m=2,
     mutate_prob=0.2,
@@ -30,16 +32,18 @@ def main(
         end_ls_temperature, end_ls_epoch_len, end_ls_epoch_alpha, 1
     )
     ma = MemeticAlgorithm(
+        p_size=population_size,
+        init_k=init_k,
         init_ls=init_sa,
         init_ls_ratio=init_ls_ratio,
         tournament_k=tournament_k,
         offspring_m=offspring_m,
         mutate_prob=mutate_prob,
         end_ls=end_sa,
-        end_ls_ratio=0.2,
+        end_ls_ratio=end_ls_ratio,
     )
 
-    results = ma.search(p, p_size=20, num_iter=10)
+    results = ma.search(p, num_iter=10)
     results.evaluate_and_sort()
 
     for i, result in enumerate(results):
