@@ -20,7 +20,7 @@ def main(
     results = ma.search(p)
 
     results = sorted(
-        [(p.evaluate(element.sol), element) for element in results], key=lambda x: x[0]
+        [(p.evaluate(element), element) for element in results], key=lambda x: x[0]
     )
     for result in results:
         print(result)

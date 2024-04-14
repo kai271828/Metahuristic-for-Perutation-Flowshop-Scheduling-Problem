@@ -1,11 +1,11 @@
 import numpy as np
 from tqdm.auto import tqdm
 
-from utils import Solution
+from utils import Solution, Population
 from SimulatedAnnealing import SimulatedAnnealing
 
 
-class MA:
+class MemeticAlgorithm:
     def __init__(
         self, cross_prob=0.5, muta_prob=0.2, epoch_len=10, alpha=0.9, temperature=3500
     ):
@@ -15,16 +15,24 @@ class MA:
         self.alpha = alpha
         self.temperature = temperature
 
-    def search(self, problem, n=20, t=10):
+    def search(self, problem, p_size=20, t=10):
         self.problem = problem
 
-        pop = [Solution(self.problem.sol_length) for i in range(n)]
+        # Initialization
+        pop = Population(length=problem.sol_length, size=p_size)
         sa = SimulatedAnnealing(self.epoch_len, self.alpha, 1)
 
+        # Evaluation
+
         for i in tqdm(range(t)):
+            # Mating selection
+            # tournament selection
             children_list = []
 
+            # Reproduction
             for j in range(n // 2):
+                # Crossover
+                # order/linear order/partially-mapped crossover/cycle crossover
                 random_indices = np.random.choice(n, 2, replace=False)
                 cross_rand = np.random.random()
 
@@ -33,6 +41,7 @@ class MA:
                 )
 
                 # Mutation
+                # insert
                 for child in children:
                     muta_rand = np.random.random()
                     if muta_rand < self.muta_prob:
@@ -45,8 +54,13 @@ class MA:
                     children_list.append(child)
 
             pop.extend(children_list)
+            # Evaluation
+
+            # Environmental selection
             pop = self.select_survivors(pop, n)
 
+            # Local search
+            # move operator should not be the same as crossover and mutation
             for j in range(n - 5, n):
                 solution, _, _, _ = sa.search(
                     self.problem, self.temperature, init_sol=pop[j]
