@@ -39,7 +39,7 @@ def main(
 
     p_bar = range(times) if run_search else tqdm(range(times))
     for i in p_bar:
-        solution, search_step, ffe, _ = sa.search(p, temperature, verbose=verbose)
+        solution, search_step, ffe, _ = sa.search(p, verbose=verbose)
         makespan = p.evaluate(solution)
         record.append(makespan)
         ffes.append(ffe)
