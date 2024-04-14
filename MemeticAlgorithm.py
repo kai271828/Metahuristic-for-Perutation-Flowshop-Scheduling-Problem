@@ -8,6 +8,7 @@ from SimulatedAnnealing import SimulatedAnnealing
 class MemeticAlgorithm:
     def __init__(
         self,
+        p_size=20,
         init_k=2,
         init_ls=None,
         init_ls_ratio=0.2,
@@ -17,6 +18,7 @@ class MemeticAlgorithm:
         end_ls=None,
         end_ls_ratio=0.2,
     ):
+        self.p_size = p_size
         self.init_k = init_k
         self.tournament_k = tournament_k
         self.mutate_prob = mutate_prob
@@ -31,10 +33,10 @@ class MemeticAlgorithm:
         ), "You have to assign an end_ls object with 'search(problem, init_sol=...)' method"
         self.end_ls = end_ls
 
-    def search(self, problem, p_size=20, num_iter=10):
+    def search(self, problem, num_iter=10):
 
         # Initialization
-        pop = Population(size=p_size, init_k=self.init_k)
+        pop = Population(size=self.p_size, init_k=self.init_k)
 
         # mutate offspring of local search of some initial solution
         mutate_indices = np.random.choice(
