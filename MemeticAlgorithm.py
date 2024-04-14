@@ -44,10 +44,10 @@ class MemeticAlgorithm:
         )
 
         for index in mutate_indices:
-            sa_result, _, _, _ = init_ls.search(problem, init_sol=pop[index])
+            ls_result, _, _, _ = self.init_ls.search(problem, init_sol=pop[index])
 
             i, j, k = np.random.choice(problem.sol_length, 3, replace=False)
-            mutated = MASolution(init_sol=sa_result).swap_3_mutate(i, j, k)
+            mutated = MASolution(init_sol=ls_result).swap_3_mutate(i, j, k)
 
             pop[i] = mutated
 
@@ -88,8 +88,8 @@ class MemeticAlgorithm:
 
             # Local search
             # move operator should not be the same as crossover and mutation
-            for j in range(p_size - 5, p_size):
-                solution, _, _, record = end_ls.search(problem, init_sol=pop[j])
+            for j in range(p_size - int(p_size * self.end_ls_ratio), p_size):
+                solution, _, _, record = self.end_ls.search(problem, init_sol=pop[j])
                 solution.makespan = record["per_ffe"][-1]
                 pop[j] = solution
 
