@@ -13,21 +13,19 @@ int64_t evaluate(const int64_t *sol, const int64_t **mj_table, const int64_t num
 
     int64_t *machine_cache = (int64_t *)calloc(num_machines, sizeof(int64_t));
 
-    for (uint64_t i = 0; i < num_jobs; i++)
-    {
-        for (uint64_t j = 0; j < num_machines; j++)
-        {
-            printf("%ld ", mj_table[j][i]);
-        }
-        printf("\n");
-    }
+    // for (uint64_t i = 0; i < num_jobs; i++)
+    // {
+    //     for (uint64_t j = 0; j < num_machines; j++)
+    //     {
+    //         printf("%ld ", mj_table[j][i]);
+    //     }
+    //     printf("\n");
+    // }
 
     for (uint64_t i = 0; i < num_jobs; i++)
     {
         for (uint64_t machine_id = 0; machine_id < num_machines; machine_id++)
         {
-
-            printf("i: %lu, machine_id: %lu\n", i, machine_id);
 
             if (machine_id != 0)
             {
