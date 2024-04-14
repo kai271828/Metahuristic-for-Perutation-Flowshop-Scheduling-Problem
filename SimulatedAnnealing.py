@@ -6,17 +6,19 @@ from utils import Solution
 class SimulatedAnnealing:
     def __init__(
         self,
+        temperature,
         epoch_len,
         alpha,
         stopcriterion,
     ):
+        self.temperature = temperature
         self.epoch_len = epoch_len
         self.alpha = alpha
         self.stopcriterion = stopcriterion
 
-    def search(self, problem, temperature, init_sol=None, verbose=False):
-
+    def search(self, problem, init_sol=None, verbose=False):
         i = Solution(length=problem.sol_length, init_sol=init_sol)
+        temperature = self.temperature
         length = self.epoch_len
         k = 0
         ffe = 0
