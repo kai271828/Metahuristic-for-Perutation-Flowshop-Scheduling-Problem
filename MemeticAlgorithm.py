@@ -153,8 +153,8 @@ class Population:
 
     def evaluate_and_sort(self, problem):
         for p in self._pop:
+            print(p)
             if not hasattr(p, "makespan"):
-                print(p)
                 p.makespan = problem.evaluate(p)
 
         self._pop.sort(key=lambda x: x.makespan)
