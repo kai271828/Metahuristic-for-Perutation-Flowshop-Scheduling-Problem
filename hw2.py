@@ -1,6 +1,8 @@
+import concurrent.futures
 import fire
 import numpy as np
 from typing import Union
+
 
 from utils import PFSProblem
 from SimulatedAnnealing import SimulatedAnnealing
@@ -52,25 +54,26 @@ def main(
     makespan_record = []
     diversity_record = []
 
-    for i in range(times):
+    with concurrent.futures.ProcessPoolExecutor() as executor:
+        for i in range(times):
 
-        print(f"[Experiment {i + 1}]")
-        results, ma_makespan_record, ma_diversity_record = ma.search(
-            p, num_iter=num_iter, verbose=verbose
-        )
-        results.evaluate_and_sort(problem=p)
+            print(f"[Experiment {i + 1}]")
+            results, ma_makespan_record, ma_diversity_record = ma.search(
+                p, num_iter=num_iter, verbose=verbose
+            )
+            results.evaluate_and_sort(problem=p)
 
-        print(f"Best makespan evolution in this experiment: {ma_makespan_record}")
-        print(f"Diversity evolution in this experiment: {ma_diversity_record}")
+            print(f"Best makespan evolution in this experiment: {ma_makespan_record}")
+            print(f"Diversity evolution in this experiment: {ma_diversity_record}")
 
-        diversity_record.append(results.diversity)
-        makespan_record.append(results[0].makespan)
-        if results[0].makespan < best:
-            best = results[0].makespan
-            best_sol = results[0]
-        if results[0].makespan > worst:
-            worst = results[0].makespan
-            worst_sol = results[0]
+            diversity_record.append(results.diversity)
+            makespan_record.append(results[0].makespan)
+            if results[0].makespan < best:
+                best = results[0].makespan
+                best_sol = results[0]
+            if results[0].makespan > worst:
+                worst = results[0].makespan
+                worst_sol = results[0]
 
     mean = np.mean(makespan_record)
     std = np.std(makespan_record)
