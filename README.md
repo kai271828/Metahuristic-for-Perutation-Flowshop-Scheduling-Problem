@@ -204,7 +204,8 @@ python hw2.py \
     --end_sa_epoch_len 15 \
     --end_sa_alpha 0.98 \
     --end_sa_ratio 0.2 \
-    --num_iter 10 
+    --num_iter 10 \
+    --times 20
 ```
 
 |  Parameter   | Description  |
@@ -224,6 +225,7 @@ python hw2.py \
 | end_sa_alpha  | Parameter of SA using in the end of iteration. See above description for detail. |
 | end_sa_ratio  | Decide how many worst solutions will do the end of iteration SA. |
 | num_iter  | The number of iteration of memetic algorithm.  |
+| times  | Total run times of this experiment. Related to output statistic. |
 | verbose  | Weather to show the experiment detail. Default to False.  |
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

@@ -23,6 +23,7 @@ def main(
     end_sa_alpha: float = 0.98,
     end_sa_ratio: float = 0.2,
     num_iter: int = 10,
+    times: int = 20,
     verbose: bool = False,
 ):
     p = PFSProblem(data_dir)
@@ -44,12 +45,31 @@ def main(
         end_ls_ratio=end_sa_ratio,
     )
 
-    results = ma.search(p, num_iter=num_iter, verbose=verbose)
-    results.evaluate_and_sort(problem=p)
+    best = np.inf
+    best_sol = None
+    worst = 0
+    worst_sol = None
+    record = []
 
-    for i, result in enumerate(results):
-        print(f"{i + 1}-th solution:{result}")
-        print(f"Makespan:{result.makespan}\n")
+    for i in range(times):
+
+        print(f"[Experiment {i + 1}]")
+        results = ma.search(p, num_iter=num_iter, verbose=verbose)
+        results.evaluate_and_sort(problem=p)
+
+        record.append(results[0])
+        if results[0].makespan < best:
+            best = results[0].makespan
+            best_sol = results[0]
+        if results[0].makespan > worst:
+            worst = results[0].makespan
+            worst_sol = results[0]
+
+    avg = sum(record) / times
+
+    print(f"\n\nBest solutin {best_sol} has makespan {best}")
+    print(f"Worst solutin {worst_sol} has makespan {worst}")
+    print(f"Average makespan {avg}")
 
 
 if __name__ == "__main__":
