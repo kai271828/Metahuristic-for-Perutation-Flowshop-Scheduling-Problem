@@ -38,7 +38,8 @@ class MemeticAlgorithm:
 
         # Initialization
         pop = Population(size=self.p_size, problem=problem, init_k=self.init_k)
-        ma_record = []
+        ma_makespan_record = []
+        ma_diversity_record = []
 
         # mutate offspring of local search of some initial solution
         mutate_indices = np.random.choice(
@@ -109,7 +110,8 @@ class MemeticAlgorithm:
 
             # Evaluation
             pop.evaluate_and_sort(problem=problem)
-            ma_record.append(pop[0].makespan)
+            ma_makespan_record.append(pop[0].makespan)
+            ma_diversity_record.append(pop.diversity)
 
             if verbose:
                 print("After evaluation:")
@@ -133,7 +135,7 @@ class MemeticAlgorithm:
                 solution.makespan = record["per_ffe"][-1]
                 pop[j] = solution
 
-        return pop, ma_record
+        return pop, ma_makespan_record, ma_diversity_record
 
 
 class MASolution(Solution):

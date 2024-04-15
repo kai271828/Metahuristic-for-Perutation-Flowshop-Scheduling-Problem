@@ -55,10 +55,13 @@ def main(
     for i in range(times):
 
         print(f"[Experiment {i + 1}]")
-        results, ma_record = ma.search(p, num_iter=num_iter, verbose=verbose)
+        results, ma_makespan_record, ma_diversity_record = ma.search(
+            p, num_iter=num_iter, verbose=verbose
+        )
         results.evaluate_and_sort(problem=p)
 
-        print(f"Best makespan evolution in this experiment: {ma_record}")
+        print(f"Best makespan evolution in this experiment: {ma_makespan_record}")
+        print(f"Diversity evolution in this experiment: {ma_diversity_record}")
 
         diversity_record.append(results.diversity)
         makespan_record.append(results[0].makespan)
