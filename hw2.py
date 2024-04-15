@@ -84,10 +84,12 @@ def main(
         print(f"Mean: {mean}, Std: {std}\n")
         print(f"Makespan record: {makespan_record}")
         print(f"Diversity record: {diversity_record}")
-
     else:
         with Pool(processing) as p:
-            mp_record = p.map(subprocess, [index for index in range(times)])
+            mp_record = p.map(
+                subprocess,
+                [(index, ma, p, num_iter) for index in range(times)],
+            )
 
         mp_record.sort()
         mean = np.mean(mp_record)
@@ -99,11 +101,9 @@ def main(
         print(f"Makespan record: {[pair[0] for pair in mp_record]}")
 
 
-def subprocess(index):
+def subprocess(index, ma, p, num_iter):
     print(f"[Experiment {index + 1}]")
-    results, ma_makespan_record, ma_diversity_record = ma.search(
-        p, num_iter=num_iter, verbose=verbose
-    )
+    results, ma_makespan_record, ma_diversity_record = ma.search(p, num_iter=num_iter)
     results.evaluate_and_sort(problem=p)
 
     print(f"Best makespan evolution in this experiment: {ma_makespan_record}")
