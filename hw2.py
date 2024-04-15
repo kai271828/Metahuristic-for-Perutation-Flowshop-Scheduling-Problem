@@ -87,30 +87,24 @@ def main(
         print(f"Diversity record: {diversity_record}")
 
     else:
+
+        def subprocess(index):
+
+            print(f"[Experiment {index + 1}]")
+            results, ma_makespan_record, ma_diversity_record = ma.search(
+                p, num_iter=num_iter
+            )
+            results.evaluate_and_sort(problem=p)
+
+            print(f"Best makespan evolution in this experiment: {ma_makespan_record}")
+            print(f"Diversity evolution in this experiment: {ma_diversity_record}")
+
+            return results[0].makespan, results[0]
+
         with Pool(processing) as p:
             mp_record = p.map(
                 subprocess,
-                [
-                    (
-                        index,
-                        data_dir,
-                        init_sa_temperature,
-                        init_sa_epoch_len,
-                        init_sa_alpha,
-                        init_sa_ratio,
-                        population_size,
-                        init_k,
-                        tournament_k,
-                        offspring_m,
-                        mutate_prob,
-                        end_sa_temperature,
-                        end_sa_epoch_len,
-                        end_sa_alpha,
-                        end_sa_ratio,
-                        num_iter,
-                    )
-                    for index in range(times)
-                ],
+                [index for index in range(times)],
             )
 
         mp_record.sort()
@@ -121,52 +115,6 @@ def main(
         print(f"Worst solutin {mp_record[0][1]} has makespan {mp_record[0][1]}")
         print(f"Mean: {mean}, Std: {std}\n")
         print(f"Makespan record: {[pair[0] for pair in mp_record]}")
-
-
-def subprocess(
-    index,
-    data_dir,
-    init_sa_temperature,
-    init_sa_epoch_len,
-    init_sa_alpha,
-    init_sa_ratio,
-    population_size,
-    init_k,
-    tournament_k,
-    offspring_m,
-    mutate_prob,
-    end_sa_temperature,
-    end_sa_epoch_len,
-    end_sa_alpha,
-    end_sa_ratio,
-    num_iter,
-):
-
-    p = PFSProblem(data_dir)
-    init_sa = SimulatedAnnealing(
-        init_sa_temperature, init_sa_epoch_len, init_sa_alpha, 1
-    )
-    end_sa = SimulatedAnnealing(end_sa_temperature, end_sa_epoch_len, end_sa_alpha, 1)
-    ma = MemeticAlgorithm(
-        p_size=population_size,
-        init_k=init_k,
-        init_ls=init_sa,
-        init_ls_ratio=init_sa_ratio,
-        tournament_k=tournament_k,
-        offspring_m=offspring_m,
-        mutate_prob=mutate_prob,
-        end_ls=end_sa,
-        end_ls_ratio=end_sa_ratio,
-    )
-
-    print(f"[Experiment {index + 1}]")
-    results, ma_makespan_record, ma_diversity_record = ma.search(p, num_iter=num_iter)
-    results.evaluate_and_sort(problem=p)
-
-    print(f"Best makespan evolution in this experiment: {ma_makespan_record}")
-    print(f"Diversity evolution in this experiment: {ma_diversity_record}")
-
-    return results[0].makespan, results[0]
 
 
 if __name__ == "__main__":
