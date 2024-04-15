@@ -1,7 +1,7 @@
-import concurrent.futures
 import fire
 import numpy as np
 from typing import Union
+from multiprocessing import Pool
 
 
 from utils import PFSProblem
@@ -26,6 +26,7 @@ def main(
     end_sa_ratio: float = 0.2,
     num_iter: int = 10,
     times: int = 20,
+    processing: int = 2,
     verbose: bool = False,
 ):
     p = PFSProblem(data_dir)
@@ -47,14 +48,14 @@ def main(
         end_ls_ratio=end_sa_ratio,
     )
 
-    best = np.inf
-    best_sol = None
-    worst = 0
-    worst_sol = None
-    makespan_record = []
-    diversity_record = []
+    if processing == 1:
+        best = np.inf
+        best_sol = None
+        worst = 0
+        worst_sol = None
+        makespan_record = []
+        diversity_record = []
 
-    with concurrent.futures.ProcessPoolExecutor() as executor:
         for i in range(times):
 
             print(f"[Experiment {i + 1}]")
@@ -75,14 +76,40 @@ def main(
                 worst = results[0].makespan
                 worst_sol = results[0]
 
-    mean = np.mean(makespan_record)
-    std = np.std(makespan_record)
+        mean = np.mean(makespan_record)
+        std = np.std(makespan_record)
 
-    print(f"\n\nBest solutin {best_sol} has makespan {best}")
-    print(f"Worst solutin {worst_sol} has makespan {worst}")
-    print(f"Mean: {mean}, Std: {std}\n")
-    print(f"Makespan record: {makespan_record}")
-    print(f"Diversity record: {diversity_record}")
+        print(f"\n\nBest solutin {best_sol} has makespan {best}")
+        print(f"Worst solutin {worst_sol} has makespan {worst}")
+        print(f"Mean: {mean}, Std: {std}\n")
+        print(f"Makespan record: {makespan_record}")
+        print(f"Diversity record: {diversity_record}")
+
+    else:
+        with Pool(processing) as p:
+            mp_record = p.map(subproces, [index for index in range(times)])
+
+        mp_record.sort()
+        mean = np.mean(mp_record)
+        std = np.std(mp_record)
+
+        print(f"\n\nBest solutin {mp_record[0][1]} has makespan {mp_record[0][0]}")
+        print(f"Worst solutin {mp_record[0][1]} has makespan {mp_record[0][1]}")
+        print(f"Mean: {mean}, Std: {std}\n")
+        print(f"Makespan record: {[pair[0] for pair in mp_record]}")
+
+
+def subprocess(index):
+    print(f"[Experiment {index + 1}]")
+    results, ma_makespan_record, ma_diversity_record = ma.search(
+        p, num_iter=num_iter, verbose=verbose
+    )
+    results.evaluate_and_sort(problem=p)
+
+    print(f"Best makespan evolution in this experiment: {ma_makespan_record}")
+    print(f"Diversity evolution in this experiment: {ma_diversity_record}")
+
+    return results[0].makespan, results[0]
 
 
 if __name__ == "__main__":
