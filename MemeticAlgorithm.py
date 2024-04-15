@@ -110,8 +110,6 @@ class MemeticAlgorithm:
 
             # Evaluation
             pop.evaluate_and_sort(problem=problem)
-            ma_makespan_record.append(pop[0].makespan)
-            ma_diversity_record.append(pop.diversity)
 
             if verbose:
                 print("After evaluation:")
@@ -120,6 +118,8 @@ class MemeticAlgorithm:
 
             # Environmental selection
             pop.environmental_select()
+            ma_makespan_record.append(pop[0].makespan)
+            ma_diversity_record.append(pop.diversity)
 
             if verbose:
                 print("After environmental selection:")
