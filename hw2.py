@@ -57,7 +57,7 @@ def main(
         results = ma.search(p, num_iter=num_iter, verbose=verbose)
         results.evaluate_and_sort(problem=p)
 
-        record.append(results[0])
+        record.append(results[0].makespan)
         if results[0].makespan < best:
             best = results[0].makespan
             best_sol = results[0]
