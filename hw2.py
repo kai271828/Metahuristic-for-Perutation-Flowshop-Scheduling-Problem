@@ -65,11 +65,13 @@ def main(
             worst = results[0].makespan
             worst_sol = results[0]
 
-    avg = sum(record) / times
+    mean = np.mean(record)
+    std = np.std(record)
 
     print(f"\n\nBest solutin {best_sol} has makespan {best}")
     print(f"Worst solutin {worst_sol} has makespan {worst}")
-    print(f"Average makespan {avg}")
+    print(f"Mean: {mean}, Std: {std}")
+    print(f"Makespan record: {record}")
 
 
 if __name__ == "__main__":
