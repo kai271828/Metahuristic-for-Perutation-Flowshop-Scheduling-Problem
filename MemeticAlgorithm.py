@@ -186,6 +186,10 @@ class Population:
     def length(self):
         return self._length
 
+    @property
+    def diversity(self):
+        return len(set([p.makespan for p in self]))
+
     def append(self, p):
         self._pop.append(p)
 
