@@ -59,7 +59,7 @@ def main(
         results.evaluate_and_sort(problem=p)
 
         print(f"Best makespan evolution in this experiment: {ma_makespan_record}")
-        print(f"Diversity evolution in this experiment: {ma_diversity_record}")
+        print(f"Diversity evolution in this experiment: {ma_diversity_record}\n")
 
         diversity_record.append(results.diversity)
         makespan_record.append(results[0].makespan)
