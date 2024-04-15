@@ -55,8 +55,10 @@ def main(
     for i in range(times):
 
         print(f"[Experiment {i + 1}]")
-        results = ma.search(p, num_iter=num_iter, verbose=verbose)
+        results, ma_record = ma.search(p, num_iter=num_iter, verbose=verbose)
         results.evaluate_and_sort(problem=p)
+
+        print(f"Best makespan evolution in this experiment: {ma_record}")
 
         diversity_record.append(results.diversity)
         makespan_record.append(results[0].makespan)
@@ -72,7 +74,7 @@ def main(
 
     print(f"\n\nBest solutin {best_sol} has makespan {best}")
     print(f"Worst solutin {worst_sol} has makespan {worst}")
-    print(f"Mean: {mean}, Std: {std}")
+    print(f"Mean: {mean}, Std: {std}\n")
     print(f"Makespan record: {makespan_record}")
     print(f"Diversity record: {diversity_record}")
 

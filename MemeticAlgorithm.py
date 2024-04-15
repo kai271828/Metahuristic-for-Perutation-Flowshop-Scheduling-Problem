@@ -38,6 +38,7 @@ class MemeticAlgorithm:
 
         # Initialization
         pop = Population(size=self.p_size, problem=problem, init_k=self.init_k)
+        record = []
 
         # mutate offspring of local search of some initial solution
         mutate_indices = np.random.choice(
@@ -108,6 +109,7 @@ class MemeticAlgorithm:
 
             # Evaluation
             pop.evaluate_and_sort(problem=problem)
+            record.append(pop[0].makespan)
 
             if verbose:
                 print("After evaluation:")
@@ -131,7 +133,7 @@ class MemeticAlgorithm:
                 solution.makespan = record["per_ffe"][-1]
                 pop[j] = solution
 
-        return pop
+        return pop, record
 
 
 class MASolution(Solution):
