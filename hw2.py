@@ -87,7 +87,7 @@ def main(
 
     else:
         with Pool(processing) as p:
-            mp_record = p.map(subproces, [index for index in range(times)])
+            mp_record = p.map(subprocess, [index for index in range(times)])
 
         mp_record.sort()
         mean = np.mean(mp_record)
