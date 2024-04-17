@@ -199,6 +199,7 @@ python hw2.py \
     --init_k 5 \
     --tournament_k 2 \
     --offspring_m 2 \
+    --crossover_prob 0.8 \
     --mutate_prob 0.2 \
     --end_sa_temperature 3000 \
     --end_sa_epoch_len 15 \
