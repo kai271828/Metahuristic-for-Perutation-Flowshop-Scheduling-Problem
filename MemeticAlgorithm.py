@@ -14,6 +14,7 @@ class MemeticAlgorithm:
         init_ls_ratio=0.2,
         tournament_k=2,
         offspring_m=2,
+        corssover_prob=0.8,
         mutate_prob=0.2,
         end_ls=None,
         end_ls_ratio=0.2,
@@ -22,6 +23,7 @@ class MemeticAlgorithm:
         self.init_k = init_k
         self.tournament_k = tournament_k
         self.offspring_m = offspring_m
+        self.corssover_prob = corssover_prob
         self.mutate_prob = mutate_prob
         self.init_ls_ratio = init_ls_ratio
         assert (
@@ -74,13 +76,16 @@ class MemeticAlgorithm:
 
             # Reproduction
             for j in range(int(pop.size // 2 * self.offspring_m)):
+
                 # Mating selection (tournament selection)
                 parent_id_1 = pop.k_tournament(self.tournament_k)
                 parent_id_2 = pop.k_tournament(self.tournament_k)
 
                 # Crossover
                 # order/linear order/partially-mapped crossover/cycle crossover
-                offspring_1, offspring_2 = pop.crossover(parent_id_1, parent_id_2)
+                offspring_1, offspring_2 = pop.crossover(
+                    parent_id_1, parent_id_2, self.corssover_prob
+                )
 
                 if verbose:
                     print(f"Offspring 1: {offspring_1}\nOffspring 2: {offspring_2}\n")
@@ -209,28 +214,34 @@ class Population:
         random_indices = np.random.choice(self.size, k, replace=False)
         return np.min(random_indices)
 
-    def crossover(self, parent_id_1, parent_id_2):
+    def crossover(self, parent_id_1, parent_id_2, prob):
+
+        random_num = np.random.random()
         offspring_1 = MASolution(init_sol=self._pop[parent_id_1])
         offspring_2 = MASolution(init_sol=self._pop[parent_id_2])
 
-        # Randomly select two points
-        point_1, point_2 = sorted(np.random.choice(self.length, 2, replace=False))
+        if random_num < prob:
+            # Randomly select two points
+            point_1, point_2 = sorted(np.random.choice(self.length, 2, replace=False))
 
-        # Create sets to keep track of selected elements
-        selected_1 = set(offspring_1[point_1:point_2])
-        selected_2 = set(offspring_2[point_1:point_2])
+            # Create sets to keep track of selected elements
+            selected_1 = set(offspring_1[point_1:point_2])
+            selected_2 = set(offspring_2[point_1:point_2])
 
-        # The remaining elements in parent 2 are added to offspring 1 in order, and vice versa
-        index_1 = index_2 = point_2
-        for i in range(self.length):
-            if self._pop[parent_id_2][i] not in selected_1:
-                offspring_1[index_1 % self.length] = self._pop[parent_id_2][i]
-                index_1 += 1
-            if self._pop[parent_id_1][i] not in selected_2:
-                offspring_2[index_2 % self.length] = self._pop[parent_id_1][i]
-                index_2 += 1
+            # The remaining elements in parent 2 are added to offspring 1 in order, and vice versa
+            index_1 = index_2 = point_2
+            for i in range(self.length):
+                if self._pop[parent_id_2][i] not in selected_1:
+                    offspring_1[index_1 % self.length] = self._pop[parent_id_2][i]
+                    index_1 += 1
+                if self._pop[parent_id_1][i] not in selected_2:
+                    offspring_2[index_2 % self.length] = self._pop[parent_id_1][i]
+                    index_2 += 1
 
-        return offspring_1, offspring_2
+            return offspring_1, offspring_2
+
+        else:
+            return offspring_1, offspring_2
 
     def environmental_select(self):
         """Select the best self.size solutions to survive"""

@@ -219,6 +219,7 @@ python hw2.py \
 | init_k  | Initialize init_k * population_size solution and select the top ones. |
 | tournament_k  | Conduct k tournament as mating selection. |
 | offspring_m  | Generate m times the number of offspring as parents. |
+| crossover_prob  | The probability of conducting the crossover. |
 | mutate_prob  | The probability of the mutation of each offspring generated. |
 | end_sa_temperature  | Parameter of SA using in the end of iteration. See above description for detail. |
 | end_sa_epoch_len  | Parameter of SA using in the end of iteration. See above description for detail. |
