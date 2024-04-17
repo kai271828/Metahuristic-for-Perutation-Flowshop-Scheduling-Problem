@@ -14,7 +14,7 @@ class MemeticAlgorithm:
         init_ls_ratio=0.2,
         tournament_k=2,
         offspring_m=2,
-        corssover_prob=0.8,
+        crossover_prob=0.8,
         mutate_prob=0.2,
         end_ls=None,
         end_ls_ratio=0.2,
@@ -23,7 +23,7 @@ class MemeticAlgorithm:
         self.init_k = init_k
         self.tournament_k = tournament_k
         self.offspring_m = offspring_m
-        self.corssover_prob = corssover_prob
+        self.crossover_prob = crossover_prob
         self.mutate_prob = mutate_prob
         self.init_ls_ratio = init_ls_ratio
         assert (
@@ -84,7 +84,7 @@ class MemeticAlgorithm:
                 # Crossover
                 # order/linear order/partially-mapped crossover/cycle crossover
                 offspring_1, offspring_2 = pop.crossover(
-                    parent_id_1, parent_id_2, self.corssover_prob
+                    parent_id_1, parent_id_2, self.crossover_prob
                 )
 
                 if verbose:
