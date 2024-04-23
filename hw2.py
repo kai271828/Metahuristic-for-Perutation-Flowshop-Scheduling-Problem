@@ -77,7 +77,7 @@ def main(
 
     print(f"\n\nBest solutin {best_sol} has makespan {best}")
     print(f"Worst solutin {worst_sol} has makespan {worst}")
-    print(f"Mean: {mean}, Std: {std}\n")
+    print(f"{best} / {mean}±{std} / {worst}\n")
     print(f"Makespan record: {makespan_record}")
     print(f"Diversity record: {diversity_record}")
 
